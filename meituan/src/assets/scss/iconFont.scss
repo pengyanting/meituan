@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 254142 */
+  src: url('http://at.alicdn.com/t/font_0v9mdq1o9fab57b9.eot');
+  src: url('http://at.alicdn.com/t/font_0v9mdq1o9fab57b9.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_0v9mdq1o9fab57b9.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_0v9mdq1o9fab57b9.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_0v9mdq1o9fab57b9.svg#iconfont') format('svg');
+}
+@mixin iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 20px;
+}
+.icon-wai:before {
+    @include iconfont;
+    content: '\e722';
+    display: block;
+    margin: 5px;
+    
+}
+.icon-order:before {
+    @include iconfont;
+    content: '\e614';
+    display: block;
+    margin: 5px;
+}
+.icon-find:before {
+    @include iconfont;
+    content: '\e623';
+    display: block;
+    margin: 5px;
+}
+.icon-my:before {
+    @include iconfont;
+    content: '\e649';
+    display: block;
+    margin: 5px;
+}
+.icon-pos:before {
+    @include iconfont;
+    content: '\e600';
+}
