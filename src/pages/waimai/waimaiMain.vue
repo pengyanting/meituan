@@ -85,8 +85,8 @@
             </div>
         </section>
         <div class='space'></div>
-        <section>
-            
+        <section class='introList'>
+            <div class='title'>推荐商家</div>               
         </section>
     </div>
 </template>
@@ -420,6 +420,15 @@
             img {
                 width: 100%;
             }
+        }
+    }
+    .introList {
+        .title{
+            margin-left:10px;
+            padding:10px 0px;
+            border-bottom:1px solid #f1f1f1;
+            color:#646464;
+            font-size:14px;
         }
     }
 </style>
