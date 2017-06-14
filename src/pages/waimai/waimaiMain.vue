@@ -86,14 +86,17 @@
         </section>
         <div class='space'></div>
         <section class='introList'>
-            <div class='title'>推荐商家</div>               
+            <h4 class='title'>推荐商家</h4> 
+            <List></List>              
         </section>
+        <div class='space'></div>
     </div>
 </template>
 <script>
     import Search from "../../components/search.vue"
     import '../../libs/swiper.min.js'
     import '../../assets/swiper.min.css'
+    import List from './list.vue'
     export default {
         data() {
             return {
@@ -207,7 +210,8 @@
 
         },
         components: {
-            Search
+            Search,
+            List
         }
     }
 
