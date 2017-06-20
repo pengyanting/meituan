@@ -6,6 +6,7 @@
             <li class='star_item'></li>
             <li class='star_item'></li>
             <li class='star_item'></li>
+            <li class='score'>{{score}}</li>
         </ul>
     </div>
 </template>
@@ -16,6 +17,7 @@
 
             }
         },
+        props:['score'],
         methods: {
             handlestar() {
                
@@ -29,22 +31,26 @@
         ul,li {
             padding: 0;
             margin: 0;
-            width: 80px;
             height: 15px;
         }
-        ul {
-           
-        }
-        li {
+        li{
             list-style-type: none;
+            float: left;
+            cursor: pointer;
+        }
+        .star_item {
             width: 15px;
             height: 15px;
             background-image: url(../assets/images/star.png);
             background-repeat: no-repeat;
             background-position: -17px 0px;
             background-size: cover;
-            float: left;
-            cursor: pointer;
+        }
+        .score{
+            font-size: 12px;
+            color: #feaa0c;
+            line-height: 20px;
+            margin: 0 5px;
         }
     }
 </style>

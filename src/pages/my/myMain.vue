@@ -86,7 +86,6 @@
         mounted() {
             this.$store.dispatch('LOGIN_TYPE', localStorage.getItem('phone'));
             this.phone = localStorage.getItem('phone');
-            console.log(this.$store.state.loginType)
         }
     }
 

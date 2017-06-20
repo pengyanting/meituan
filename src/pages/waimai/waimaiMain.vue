@@ -86,8 +86,10 @@
         </section>
         <div class='space'></div>
         <section class='introList'>
-            <h4 class='title'>推荐商家</h4> 
-            <List></List>              
+            <h4 class='title'>推荐商家</h4>
+            <div v-for='item in $root._data.list.list' :key='item'>
+                <List :foodList='item' ></List>
+            </div>
         </section>
         <div class='space'></div>
     </div>
@@ -184,8 +186,8 @@
                         desc: '热销好店'
                     }
                 ],
-                pinzhiBottomList:[
-                     {
+                pinzhiBottomList: [
+                    {
                         title: '推荐有奖',
                         desc: '5元现金拿不停'
                     }, {
@@ -207,8 +209,9 @@
             })
         },
         methods: {
-
+            
         },
+        props: ['foodList'],
         components: {
             Search,
             List
@@ -426,13 +429,14 @@
             }
         }
     }
+    
     .introList {
-        .title{
-            margin-left:10px;
-            padding:10px 0px;
-            border-bottom:1px solid #f1f1f1;
-            color:#646464;
-            font-size:14px;
+        .title {
+            margin-left: 10px;
+            padding: 10px 0px;
+            border-bottom: 1px solid #f1f1f1;
+            color: #646464;
+            font-size: 14px;
         }
     }
 </style>
