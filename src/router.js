@@ -7,6 +7,9 @@ import PwLogin from './pages/login/PwLogin.vue'
 // 我的
 import My from './pages/my/myMain.vue'
 import AccountSafe from './pages/my/accountSafe.vue'
+
+// 外卖
+import ListDetail from './pages/waimai/listDetail'
 Vue.use(VueRouter)
 const routes = [{
   path: '',
@@ -24,6 +27,10 @@ const routes = [{
   name: '我的',
   path: '/my/accountSafe',
   component: AccountSafe
+}, {
+  name: '商家详情',
+  path: '/waimai/listDetail',
+  component: ListDetail
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

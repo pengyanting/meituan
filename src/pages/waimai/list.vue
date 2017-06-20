@@ -1,49 +1,51 @@
 <template>
-    <div  @click='toListDetail' style='padding:25px 10px;border-bottom:1px solid #DFDDD8;display:flex;'>
-        <div class='food_pic'>
-            <img src='../../assets/images/kfc.png' alt="肯德基">
-        </div>
-        <div class='food_text'>
-            <section>
-                <h3 class='food_title'>
-                    <img v-show='foodList.isadImg' src="../../assets/images/pinpai.png" alt="">
-                    <span>{{foodList.title}}</span>
-                    <span class='bao'>保</span>
-                    <span class='bao'>保</span>
-                </h3>
-                <div class='sell'>
-                    <StarLevel class='satrScore' :score='foodList.score'></StarLevel>
-                    <span class='sellNum'>月售{{foodList.sellNum}}单</span>
-                </div>
-                <div class='peisong'>
-                    <ul class='peisongfei'>
-                        <li>￥{{foodList.qisongfei}}元起送</li>
-                        <span>|</span>
-                        <li>配送费￥{{foodList.peisongfei}}</li>
-                        <span>|</span>
-                        <li>￥{{foodList.renjun}}/人</li>
-                    </ul>
-                    <ul class='distance'>
-                        <li>450m</li>
-                        <span>|</span>
-                        <li>40分钟</li>
-                    </ul>
-                </div>
-                <div class='active'>
-                    <ul :class="{'activeClass':isActive}">
-                        <li v-for='(item,index) in foodList.activelist' :key='item'>
-                            <span :class="{'jian':item.youhui=='减','te':item.youhui=='特','zhe':item.youhui=='折','xin':item.youhui=='新','ling':item.youhui=='领'}">
+    <div>
+        <router-link to="/waimai/listDetail" style='padding:25px 10px;border-bottom:1px solid #DFDDD8;display:flex;'>
+            <div class='food_pic'>
+                <img src='../../assets/images/kfc.png' alt="肯德基">
+            </div>
+            <div class='food_text'>
+                <section>
+                    <h3 class='food_title'>
+                        <img v-show='foodList.isadImg' src="../../assets/images/pinpai.png" alt="">
+                        <span>{{foodList.title}}</span>
+                        <span class='bao'>保</span>
+                        <span class='bao'>保</span>
+                    </h3>
+                    <div class='sell'>
+                        <StarLevel class='satrScore' :score='foodList.score'></StarLevel>
+                        <span class='sellNum'>月售{{foodList.sellNum}}单</span>
+                    </div>
+                    <div class='peisong'>
+                        <ul class='peisongfei'>
+                            <li>￥{{foodList.qisongfei}}元起送</li>
+                            <span>|</span>
+                            <li>配送费￥{{foodList.peisongfei}}</li>
+                            <span>|</span>
+                            <li>￥{{foodList.renjun}}/人</li>
+                        </ul>
+                        <ul class='distance'>
+                            <li>450m</li>
+                            <span>|</span>
+                            <li>40分钟</li>
+                        </ul>
+                    </div>
+                    <div class='active'>
+                        <ul :class="{'activeClass':isActive}">
+                            <li v-for='(item,index) in foodList.activelist' :key='item'>
+                                <span :class="{'jian':item.youhui=='减','te':item.youhui=='特','zhe':item.youhui=='折','xin':item.youhui=='新','ling':item.youhui=='领'}">
                             {{item.youhui}}
                             </span>
-                            <span>{{item.title}}</span>
-                        </li>
-                    </ul>
-                    <div class='activeNum' @click.stop='handleActive' v-if='foodList.activelist.length>2'>
-                        {{foodList.activelist.length}}个活动<img src="../../assets/images/sanjiao.png" alt="">
+                                <span>{{item.title}}</span>
+                            </li>
+                        </ul>
+                        <div class='activeNum' @click.stop='handleActive' v-if='foodList.activelist.length>2'>
+                            {{foodList.activelist.length}}个活动<img src="../../assets/images/sanjiao.png" alt="">
+                        </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
+        </router-link>
     </div>
 </template>
 <script>
@@ -58,8 +60,8 @@
             handleActive() {
                 this.isActive = !this.isActive;
             },
-            toListDetail(){
-                
+            toListDetail() {
+
             }
         },
         mounted() {
@@ -95,7 +97,7 @@
             img {
                 width: 45px;
                 height: 21px;
-                 margin-right: 8px;
+                margin-right: 8px;
             }
             span:nth-of-type(1) {
                 font-size: 15px;
