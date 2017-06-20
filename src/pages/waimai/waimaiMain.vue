@@ -3,7 +3,7 @@
         <mt-header>
             <div slot="left">
                 <span class="icon-pos"></span>
-                <span>上海市普陀区中江路</span>
+                <span id='XSDFXPage'>上海市普陀区中江路</span>
             </div>
         </mt-header>
         <Search></Search>
@@ -88,7 +88,7 @@
         <section class='introList'>
             <h4 class='title'>推荐商家</h4>
             <div v-for='item in $root._data.list.list' :key='item'>
-                <List :foodList='item' ></List>
+                <List :foodList='item'></List>
             </div>
         </section>
         <div class='space'></div>
@@ -99,6 +99,7 @@
     import '../../libs/swiper.min.js'
     import '../../assets/swiper.min.css'
     import List from './list.vue'
+    import BMap from 'BMap'
     export default {
         data() {
             return {
@@ -207,9 +208,20 @@
                 slidesPerView: 3.5,
                 slidesPerGroup: 1,
             })
+            this.ready();
         },
         methods: {
-            
+            ready: function () {
+                var map = new BMap.Map('XSDFXPage');
+                var point = new BMap.Point(104.075796, 30.659684);
+                map.centerAndZoom(new BMap.Point(104.047404, 30.696035), 14);
+                map.addControl(new BMap.MapTypeControl());
+                map.setCurrentCity('小龙坎火锅');
+                map.enableScrollWheelZoom(true);
+                map.enableDoubleClickZoom(true);
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+            }
         },
         props: ['foodList'],
         components: {

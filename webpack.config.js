@@ -8,6 +8,10 @@ module.exports = {
     entry: {
         index: './src/app.js'
     },
+    //配置百度
+    externals: {
+        "BMap": "BMap"
+    },
     // 配置打包输出相关
     output: {
         // 打包输出目录
