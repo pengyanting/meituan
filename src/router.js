@@ -31,14 +31,19 @@ const routes = [{
   }, {
     name: '外卖',
     path: '/waimai',
-    component: WaiMai
+    component: WaiMai,
+    children: [{
+      name: '商家详情',
+      path: '/waimai/listDetail',
+      component: ListDetail
+    }]
   }, {
     name: '发现',
     path: '/find',
     component: Find
   }, {
     name: '订单',
-    path: '/order', 
+    path: '/order',
     component: Order
   }]
 }, {
@@ -51,18 +56,13 @@ const routes = [{
   path: '/PwLogin',
   component: PwLogin
 }, {
-  name: '我的',
+  name: '账户与安全',
   path: '/my/accountSafe',
-  component: AccountSafe,
-  chrildren: [{
-    name: '用户名',
-    path: '/my/accountSafe/updateUserName',
-    component: UpdateUserName
-  }]
+  component: AccountSafe
 }, {
-  name: '商家详情',
-  path: '/waimai/listDetail',
-  component: ListDetail
+  name: '用户名',
+  path: '/my/accountSafe/updateUserName',
+  component: UpdateUserName
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

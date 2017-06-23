@@ -35,6 +35,7 @@
                 <img slot="icon" :src="item.icon" width="20" height="20">
             </mt-cell>
         </section>
+        <router-view ></router-view>
     </div>
 </template>
 <script>

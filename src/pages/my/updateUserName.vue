@@ -4,8 +4,8 @@
             <mt-button icon="back" slot='left' @click='handleBack'>用户名</mt-button>
         </mt-header>
         <div class='space' style="margin-top: 40px;"></div>
-        <div>
-             <mt-field  placeholder="用户名" :attr="{ maxlength: 24,minLength:5 }"></mt-field>
+        <div class='filed'>
+             <input type="text" placeholder="用户名" autofocus>
         </div>
     </div>
 </template>
@@ -31,5 +31,10 @@
 
 </script>
 <style lang='sass'>
-
+   .filed{
+       input{
+           ouline:none;
+           border:0;
+       }
+   }
 </style>
