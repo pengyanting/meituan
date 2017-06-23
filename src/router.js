@@ -7,13 +7,40 @@ import PwLogin from './pages/login/PwLogin.vue'
 // 我的
 import My from './pages/my/myMain.vue'
 import AccountSafe from './pages/my/accountSafe.vue'
+import UpdateUserName from './pages/my/updateUserName.vue'
 
 // 外卖
+import WaiMai from './pages/waimai/waimaiMain.vue'
 import ListDetail from './pages/waimai/listDetail'
+
+// 发现
+import Find from './pages/find/findMain.vue'
+
+// 订单
+import Order from './pages/order/orderMain.vue'
+
+
 Vue.use(VueRouter)
 const routes = [{
   path: '',
-  component: Index
+  component: Index,
+  children: [{
+    name: '我的',
+    path: '/my',
+    component: My
+  }, {
+    name: '外卖',
+    path: '/waimai',
+    component: WaiMai
+  }, {
+    name: '发现',
+    path: '/find',
+    component: Find
+  }, {
+    name: '订单',
+    path: '/order', 
+    component: Order
+  }]
 }, {
   path: '/login',
   component: Login,
@@ -26,7 +53,12 @@ const routes = [{
 }, {
   name: '我的',
   path: '/my/accountSafe',
-  component: AccountSafe
+  component: AccountSafe,
+  chrildren: [{
+    name: '用户名',
+    path: '/my/accountSafe/updateUserName',
+    component: UpdateUserName
+  }]
 }, {
   name: '商家详情',
   path: '/waimai/listDetail',

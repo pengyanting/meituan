@@ -100,6 +100,7 @@
     import '../../assets/swiper.min.css'
     import List from './list.vue'
     import BMap from 'BMap'
+    import axios from "axios"
     export default {
         data() {
             return {
@@ -212,15 +213,51 @@
         },
         methods: {
             ready: function () {
-                var map = new BMap.Map('XSDFXPage');
-                var point = new BMap.Point(104.075796, 30.659684);
-                map.centerAndZoom(new BMap.Point(104.047404, 30.696035), 14);
-                map.addControl(new BMap.MapTypeControl());
-                map.setCurrentCity('小龙坎火锅');
-                map.enableScrollWheelZoom(true);
-                map.enableDoubleClickZoom(true);
-                var marker = new BMap.Marker(point);
-                map.addOverlay(marker);
+
+                // var map = new BMap.Map('XSDFXPage');
+                // var point = new BMap.Point(104.075796, 30.659684);
+                // map.centerAndZoom(new BMap.Point(104.047404, 30.696035), 14);
+                // map.addControl(new BMap.MapTypeControl());
+                // map.setCurrentCity('小龙坎火锅');
+                // map.enableScrollWheelZoom(true);
+                // map.enableDoubleClickZoom(true);
+                // var marker = new BMap.Marker(point);
+                // map.addOverlay(marker);
+              
+                // var map = new BMap.Map("XSDFXPage");
+                // var point = new BMap.Point(116.331398, 39.897445);
+                // map.centerAndZoom(point, 12);
+
+                // var geolocation = new BMap.Geolocation();
+                // geolocation.getCurrentPosition(function (r) {
+                //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                //         var mk = new BMap.Marker(r.point);
+                //         map.addOverlay(mk);
+                //         map.panTo(r.point);
+                //         console.log(r)
+                //         // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+                //         var latlon = r.point.lat+','+r.point.lng;
+                //         axios.get("http://api.map.baidu.com/geocoder/v2/?ak=9yIDfOHS7MwQHqSqGR7F6CIpSEI2SrvV&callback=renderReverse&location="+latlon+"&output=json&pois=0").then(function (res) {
+                //             console.log(res)
+                //         })
+                //     }
+                //     else {
+                //         alert('failed' + this.getStatus());
+                //     }
+                // }, { enableHighAccuracy: true })
+
+                // //百度地图API功能
+                // var map = new BMap.Map("XSDFXPage");
+                // var point = new BMap.Point(116.331398, 39.897445);
+                // // map.centerAndZoom(point, 12);
+
+                // function myFun(result) {
+                //     var cityName = result.name;
+                //     map.setCenter(cityName);
+                //     alert("当前定位城市:" + cityName);
+                // }
+                // var myCity = new BMap.LocalCity();
+                // myCity.get(myFun);
             }
         },
         props: ['foodList'],
@@ -248,7 +285,9 @@
             font-size: 12px;
         }
     }
-    
+     h4{
+         font-size:16px;
+     }
     .foodTypeBox {
         width: 100%;
         .foodType {

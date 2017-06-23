@@ -8,10 +8,10 @@
     import FootBottom from '../components/FootBottom.vue'
     export default {
         watch: {
-            '$route'(to, from) {//监听路由改变
-                this.currentPathName = to.name;
-                localStorage.setItem("title", to.name);
-            }
+            // '$route'(to, from) {//监听路由改变
+            //     this.currentPathName = to.name;
+            //     localStorage.setItem("title", to.name);
+            // }
         },
         components: {
             HeadTop,

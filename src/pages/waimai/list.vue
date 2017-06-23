@@ -39,7 +39,7 @@
                                 <span>{{item.title}}</span>
                             </li>
                         </ul>
-                        <div class='activeNum' @click.stop='handleActive' v-if='foodList.activelist.length>2'>
+                        <div class='activeNum' @click.stop.prevent='handleActive' v-if='foodList.activelist.length>2'>
                             {{foodList.activelist.length}}个活动<img src="../../assets/images/sanjiao.png" alt="">
                         </div>
                     </div>

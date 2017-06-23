@@ -18,6 +18,9 @@ Vue.use(VuerifyDirective)
 // 引入状态管理
 import store from './store/store'
 
+// 引入rem
+import './libs/rem.js'
+
 // mock模拟数据
 const Mock = require('mockjs')
 const data = Mock.mock({
@@ -41,7 +44,7 @@ const data = Mock.mock({
   }]
 })
 // 输出结果
-console.log(JSON.stringify(data, null, 4))
+// console.log(JSON.stringify(data, null, 4))
 // 初始化根实例
 new Vue({
   router,

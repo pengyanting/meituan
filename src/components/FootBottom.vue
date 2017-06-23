@@ -1,20 +1,6 @@
 <template>
     <div>
-        <mt-tab-container class="page-tabbar-container" v-model="selected">
-        <mt-tab-container-item id="外卖">
-          <waimaiMain></waimaiMain>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="发现">
-          <FindMain></FindMain>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="订单">
-          <orderMain></orderMain>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="我的">
-          <MyMain></MyMain>
-        </mt-tab-container-item>
-      </mt-tab-container>
-        <mt-tabbar v-model="selected"  @click="handleClick">
+        <mt-tabbar class='footBox' v-model='selected'>
             <mt-tab-item id="外卖">
                 <i class="icon-wai"></i> <span>外卖</span>
             </mt-tab-item>
@@ -28,31 +14,44 @@
                 <i class="icon-my"></i><span>我的</span>
             </mt-tab-item>
         </mt-tabbar>
+        <router-view></router-view>
     </div>
 </template>
 <script>
-import WaimaiMain from '../pages/waimai/waimaiMain.vue'
-import FindMain from '../pages/find/findMain.vue'
-import OrderMain from '../pages/order/orderMain.vue'
-import MyMain from '../pages/my/myMain.vue'
     export default {
         data() {
             return {
-                selected: this.$store.state.selectType,
-                active: 'tab-container1'
+                selected: 'waimai'
+            }
+        },
+        watch: {
+            selected: function (val, oldVal) {
+                switch (val) {
+                    case '外卖':
+                        this.$router.push({ path: '/waimai' });
+                        break;
+                    case '发现':
+                        this.$router.push({ path: '/find' });
+                        break;
+                    case '订单':
+                        this.$router.push({ path: '/order' });
+                        break;
+                    case '我的':
+                        this.$router.push({ path: '/my' });
+                        break;
+                    default:
+
+                }
             }
         },
         methods: {
-            handleClick() {
-                alert(1)
-                console.log('aaa')
+            aa() {
+                alert('aa')
             }
         },
-        components: {
-            WaimaiMain,
-            FindMain,
-            OrderMain,
-            MyMain
+        mounted() {
+            //默认打开外卖频道
+            this.$router.push({ path: '/waimai' });
         }
     }
 
@@ -62,10 +61,18 @@ import MyMain from '../pages/my/myMain.vue'
     .mint-tab-item-label {
         color: #656565!important;
     }
-    .mint-tabbar{
+    
+    .mint-tabbar {
         position: fixed!important;
         left: 0!important;
         bottom: 0!important;
         z-index: 99999;
+    }
+    
+    .footBox {
+        display: flex;
+        a {
+            flex: 1;
+        }
     }
 </style>

@@ -125,7 +125,7 @@ module.exports = {
          historyApiFallback用来配置页面的重定向
          */
         historyApiFallback: true,
-        host: '10.7.34.231',
+        host: '10.7.34.231'
     },
     resolve: {
         extensions: ['.js', '.vue', '.css']
