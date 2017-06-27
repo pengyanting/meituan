@@ -1,10 +1,10 @@
 <template>
     <div>
-        <mt-header fixed>
-            <span slot="left">我的</span>
-        </mt-header>
-        <div style="margin-top: 40px;" class='myLogin'>
-            <router-link to="/my/accountSafe">
+        <div>
+            <mt-header fixed>
+                <span slot="left">我的</span>
+            </mt-header>
+            <div style="margin-top: 40px;" class='myLogin'>
                 <mt-cell to="/my/accountSafe" is-link>
                     <div style="margin-left: 10px;" v-if='$store.state.loginType'>
                         <h4 class="title">哈哈哈哈</h4>
@@ -16,29 +16,28 @@
                     </div>
                     <img slot="icon" src="../../assets/images/my-head.png" width="50" height="50">
                 </mt-cell>
-            </router-link>
-        </div>
-        <section class='myItems clearfix'>
-            <div v-for="item in myItems" :key="item">
-                <p 
-                v-if='$store.state.loginType' 
-                :class='{"greenColor":item.title=="积分","redColor":item.title=="优惠","orangeColor":item.title=="余额"}'>
-                    {{item.value}}{{item.desc}}
-                </p>
-                <img :src="item.icon" alt="" v-else>
-                <span>{{item.title}}</span>
             </div>
-        </section>
-        <div class="space"></div>
-        <section>
-            <mt-cell v-for='item in myList' :title="item.title" :key='item'>
-                <img slot="icon" :src="item.icon" width="20" height="20">
-            </mt-cell>
-        </section>
-        <router-view ></router-view>
+            <section class='myItems clearfix'>
+                <div v-for="item in myItems" :key="item" @click='clickItems(item)'>
+                    <p v-if='$store.state.loginType' :class='{"greenColor":item.title=="积分","redColor":item.title=="优惠","orangeColor":item.title=="余额"}'>
+                        {{item.value}}{{item.desc}}
+                    </p>
+                    <img :src="item.icon" alt="" v-else>
+                    <span>{{item.title}}</span>
+                </div>
+            </section>
+            <div class="space"></div>
+            <section>
+                <mt-cell v-for='item in myList' :title="item.title" :key='item'>
+                    <img slot="icon" :src="item.icon" width="20" height="20">
+                </mt-cell>
+            </section>
+            <FootBottom title='我的'></FootBottom>
+        </div>
     </div>
 </template>
 <script>
+    import FootBottom from '../../components/FootBottom.vue'
     export default {
         data() {
             return {
@@ -84,15 +83,50 @@
                 ]
             }
         },
+        methods: {
+            clickItems(item) {
+                switch (item.title) {
+                    case '余额':
+                        this.$router.push({ 'path': '/my/wallet/myWallet' });
+                        break;
+                    case '优惠':
+                        break;
+                    case '积分':
+                        break;
+                    default:
+                        break;
+                }
+            }
+        },
         mounted() {
             this.$store.dispatch('LOGIN_TYPE', localStorage.getItem('phone'));
             this.phone = localStorage.getItem('phone');
+        },
+        components: {
+            FootBottom
         }
     }
 
 </script>
 <style lang="sass">
     @import "../../assets/scss/common.scss";
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    
+    .slide-fade-enter,
+    .slide-fade-leave-active {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+    
     .myLogin {
         .mint-cell:last-child {
             background-image: none!important;
@@ -165,5 +199,16 @@
         .greenColor {
             color: #67c107;
         }
+    }
+    
+    .router-slid-enter-active,
+    .router-slid-leave-active {
+        transition: all .4s;
+    }
+    
+    .router-slid-enter,
+    .router-slid-leave-active {
+        transform: translate3d(2rem, 0, 0);
+        opacity: 0;
     }
 </style>

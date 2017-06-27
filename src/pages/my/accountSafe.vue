@@ -15,12 +15,11 @@
                     <span>哈哈哈</span>
                 </mt-cell>
             </router-link>
-            <router-view></router-view>
         </section>
         <div class='space'></div>
         <section>
             <mt-cell title='账号绑定'></mt-cell>
-            <mt-cell title='手机'>
+            <mt-cell title='手机'  :to="{ name: '绑定手机' }">
                 <img slot="icon" src="../../assets/images/phone.png" width="24" height="24">
                 <span class='weibangding'>未绑定</span>
             </mt-cell>

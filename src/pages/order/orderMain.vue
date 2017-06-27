@@ -17,10 +17,12 @@
                 </mt-tab-container-item>
             </mt-tab-container>
         </div>
+        <FootBottom title='订单'></FootBottom>
     </div>
 </template>
 <script>
     import NoLogin from '../order/noLogin.vue'
+    import FootBottom from '../../components/FootBottom.vue'
     export default {
         data() {
             return {
@@ -28,7 +30,8 @@
             }
         },
         components: {
-            NoLogin
+            NoLogin,
+            FootBottom
         }
     }
 

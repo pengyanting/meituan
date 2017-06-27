@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!--<router-view></router-view>-->
         <mt-header>
             <div slot="left">
                 <span class="icon-pos"></span>
@@ -93,7 +92,6 @@
             </div>
         </section>
         <div class='space'></div>
-       
     </div>
 </template>
 <script>

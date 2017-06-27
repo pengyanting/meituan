@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from './pages/Index.vue'
+import App from './pages/App.vue'
+import Home from './pages/Index.vue'
 import Login from './pages/login/Login.vue'
 import PwLogin from './pages/login/PwLogin.vue'
 
@@ -8,6 +9,9 @@ import PwLogin from './pages/login/PwLogin.vue'
 import My from './pages/my/myMain.vue'
 import AccountSafe from './pages/my/accountSafe.vue'
 import UpdateUserName from './pages/my/updateUserName.vue'
+import BindMobile from './pages/my/bindMobile.vue'
+import MyWallet from './pages/my/wallet/myWallet.vue'
+import Balance from './pages/my/wallet/balance.vue'
 
 // 外卖
 import WaiMai from './pages/waimai/waimaiMain.vue'
@@ -22,30 +26,33 @@ import Order from './pages/order/orderMain.vue'
 
 Vue.use(VueRouter)
 const routes = [{
-  path: '',
-  component: Index,
-  children: [{
-    name: '我的',
-    path: '/my',
-    component: My
-  }, {
-    name: '外卖',
-    path: '/waimai',
-    component: WaiMai,
-    children: [{
-      name: '商家详情',
-      path: '/waimai/listDetail',
-      component: ListDetail
+  path: '/', // 顶级路由
+  component: App,
+  children: [
+    {
+      // 二级路由
+      path: '',
+      redirect: '/home'
+    }, {
+      path: '/home',
+      component: Home
+    }, {
+      name: '我的',
+      path: '/my',
+      component: My
+    }, {
+      name: '外卖',
+      path: '/waimai',
+      component: WaiMai
+    }, {
+      name: '发现',
+      path: '/find',
+      component: Find
+    }, {
+      name: '订单',
+      path: '/order',
+      component: Order
     }]
-  }, {
-    name: '发现',
-    path: '/find',
-    component: Find
-  }, {
-    name: '订单',
-    path: '/order',
-    component: Order
-  }]
 }, {
   path: '/login',
   component: Login,
@@ -60,9 +67,25 @@ const routes = [{
   path: '/my/accountSafe',
   component: AccountSafe
 }, {
+  name: '我的钱包',
+  path: '/my/wallet/myWallet',
+  component: MyWallet
+}, {
   name: '用户名',
   path: '/my/accountSafe/updateUserName',
   component: UpdateUserName
+}, {
+  name: '绑定手机',
+  path: '/my/accountSafe/bindMobile',
+  component: BindMobile
+}, {
+  name: '商家详情',
+  path: '/waimai/listDetail',
+  component: ListDetail
+}, {
+  name: '钱包余额',
+  path: '/my/wallet/balance',
+  component: Balance
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

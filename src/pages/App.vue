@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <router-view to='/waimai'></router-view>
+        <router-view></router-view>
     </div>
 </template>
 <style>

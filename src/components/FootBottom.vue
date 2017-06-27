@@ -14,21 +14,20 @@
                 <i class="icon-my"></i><span>我的</span>
             </mt-tab-item>
         </mt-tabbar>
-        <router-view></router-view>
     </div>
 </template>
 <script>
     export default {
         data() {
             return {
-                selected: '我的'
+                selected: this.title
             }
         },
         watch: {
             selected: function (val, oldVal) {
                 switch (val) {
                     case '外卖':
-                        this.$router.push({ path: '/waimai' });
+                        this.$router.push({ path: '/home' });
                         break;
                     case '发现':
                         this.$router.push({ path: '/find' });
@@ -46,9 +45,10 @@
         methods: {
             
         },
+        props:['title'],
         mounted() {
             //默认打开外卖频道
-            this.$router.push({ path: '/my' });
+            // this.$router.push({ path: '/my' });
         }
     }
 

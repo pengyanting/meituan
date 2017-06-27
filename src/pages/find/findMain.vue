@@ -21,10 +21,12 @@
             <FindList :title="n.title" :list="n.list" :desc="n.desc"></FindList>
             <div class="space" v-if="n!==4"></div>
         </div>
+        <FootBottom title='发现'></FootBottom>
     </div>
 </template>
 <script>
     import FindList from '../../components/findList.vue'
+    import FootBottom from '../../components/FootBottom.vue'
     export default {
         data() {
             return {
@@ -113,7 +115,8 @@
             }
         },
         components: {
-            FindList
+            FindList,
+            FootBottom
         }
     }
 
