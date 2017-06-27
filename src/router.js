@@ -12,6 +12,7 @@ import UpdateUserName from './pages/my/updateUserName.vue'
 import BindMobile from './pages/my/bindMobile.vue'
 import MyWallet from './pages/my/wallet/myWallet.vue'
 import Balance from './pages/my/wallet/balance.vue'
+import BalanceProblem from './pages/my/wallet/balanceProblem'
 
 // 外卖
 import WaiMai from './pages/waimai/waimaiMain.vue'
@@ -86,6 +87,10 @@ const routes = [{
   name: '钱包余额',
   path: '/my/wallet/balance',
   component: Balance
+}, {
+  name: '余额问题',
+  path: '/my/wallet/balanceProblem',
+  component: BalanceProblem
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

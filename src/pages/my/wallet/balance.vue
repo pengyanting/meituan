@@ -4,7 +4,7 @@
        <section class='box'>
            <div class='boxInner'>
                <div class='boxInner_l'>
-                   <span>
+                   <span @click='goBalanceProblem'>
                        当前余额
                    </span>
                    <div class='balance'>￥0.00</div>
@@ -30,7 +30,9 @@ import ImgTip from '../../order/noLogin.vue'
             }
         },
         methods: {
-           
+            goBalanceProblem(){
+                
+            }
         },
         components:{
             HeadTop,
