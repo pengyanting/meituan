@@ -38,7 +38,7 @@
     }
 
 </script>
-<style lang='sass' scoped>
+<style lang='sass' >
     /*scoped*/
     
     .myWallet {
