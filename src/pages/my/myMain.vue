@@ -90,6 +90,7 @@
                         this.$router.push({ 'path': '/my/wallet/myWallet' });
                         break;
                     case '优惠':
+                        this.$router.push({'path':'/my/preferential'})
                         break;
                     case '积分':
                         break;

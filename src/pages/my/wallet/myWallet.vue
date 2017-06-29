@@ -14,7 +14,7 @@
             </router-link>
         </section>
         <div class='space'></div>
-        <mt-cell title="交易明细" is-link>
+        <mt-cell title="交易明细" is-link to='/my/wallet/tradeList'>
             <img slot="icon" src="src/assets/images/traderecord.png" width="20" height="20">
         </mt-cell>
         <div class='space'></div>

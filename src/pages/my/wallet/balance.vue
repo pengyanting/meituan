@@ -31,7 +31,7 @@ import ImgTip from '../../order/noLogin.vue'
         },
         methods: {
             goBalanceProblem(){
-                
+                this.$router.push({'path':'/my/wallet/balanceProblem'})
             }
         },
         components:{
@@ -84,6 +84,7 @@ import ImgTip from '../../order/noLogin.vue'
        h5{
            padding:10px;
            color:#979797;
+           font-size:14px;
        }
    }
 </style>
