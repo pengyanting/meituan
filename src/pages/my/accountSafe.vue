@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!--<input type="file" accept="image/*">-->
         <mt-header fixed>
             <mt-button icon="back" slot='left' @click='handleBack'>账户与安全</mt-button>
         </mt-header>

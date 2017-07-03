@@ -3,9 +3,9 @@
         <div class="nlBox">
             <img :src="imgUrl" alt="">
             <p>{{text}}</p>
-            <div v-if='isBtn'>
-                <mt-button type="default" class="btn">立即登录</mt-button>
-            </div>
+
+            <mt-button type="default" class="btn">立即登录</mt-button>
+
 
         </div>
     </div>
@@ -14,10 +14,10 @@
     export default {
         data() {
             return {
-
+                isBtn: true
             }
         },
-        props: ['imgUrl', 'text', 'isBtn'],
+        props: ['imgUrl', 'text', 'isBtn', 'btnText'],
         mounted() {
             var container = this.$refs.container
             var windowH = document.documentElement.clientHeight
