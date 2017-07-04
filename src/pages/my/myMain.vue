@@ -28,7 +28,7 @@
             </section>
             <div class="space"></div>
             <section>
-                <mt-cell v-for='item in myList' :title="item.title" :key='item'>
+                <mt-cell v-for='item in myList' :title="item.title" :key='item' :to="item.links">
                     <img slot="icon" :src="item.icon" width="20" height="20">
                 </mt-cell>
             </section>
@@ -63,7 +63,8 @@
                 myList: [
                     {
                         title: '收货地址',
-                        icon: './src/assets/images/my-left-icon1.png'
+                        icon: './src/assets/images/my-left-icon1.png',
+                        links: '/my/address/addressList'
                     }, {
                         title: '我的收藏',
                         icon: './src/assets/images/my-left-icon2.png'

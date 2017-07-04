@@ -21,6 +21,7 @@ import store from './store/store'
 // 引入rem
 import './libs/rem.js'
 
+
 // mock模拟数据
 const Mock = require('mockjs')
 const data = Mock.mock({

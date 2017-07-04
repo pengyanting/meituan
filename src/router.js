@@ -19,6 +19,8 @@ import Gift from './pages/my/preferential/gift.vue'
 import Cash from './pages/my/preferential/cash.vue'
 import HistoryGift from './pages/my/preferential/historyGift.vue'
 import GiftExplain from './pages/my/preferential/giftExplain.vue'
+import AddressList from './pages/my/address/addressList.vue'
+import AddAdderss from './pages/my/address/addAddress.vue'
 
 // 外卖
 import WaiMai from './pages/waimai/waimaiMain.vue'
@@ -122,6 +124,14 @@ const routes = [{
   name: '红包说明',
   path: '/my/preferential/giftExplain',
   component: GiftExplain
+}, {
+  name: '收货地址',
+  path: '/my/address/addressList',
+  component: AddressList
+}, {
+  name: '新增地址',
+  path: '/my/address/addAddress',
+  component: AddAdderss
 }]
 
 // 创建 router 实例，然后传 `routes` 配置
