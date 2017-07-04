@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style='background: #fff;'>
         <mt-header fixed>
             <span slot="left">发现</span>
         </mt-header>

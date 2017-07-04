@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style='background:#fff;'>
         <div>
             <mt-header fixed>
                 <span slot="left">我的</span>

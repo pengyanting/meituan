@@ -1,5 +1,5 @@
 <template>
-  <div style='background:#f7f7f7;height:700px;width:100%;margin-top:88px;'>
+  <div style='background:#f7f7f7;width:100%;margin-top:88px;'>
     <section class='giftAd'>
       <div class='giftItem'>
         <div class='giftInner'>
@@ -38,8 +38,10 @@
               <li v-for='xian in item.xian'>{{xian}}</li>
             </ul>
             <div class='giftbtn'>
-              <p v-if='item.isToday' class='jinri'>限今日</p>
-              <p class='liji'>立即使用</p>
+              <div>
+                <p v-if='item.isToday' class='jinri'>限今日</p>
+                <p class='liji'>立即使用</p>
+              </div>
             </div>
           </div>
           <div class='line'></div>
@@ -49,9 +51,9 @@
         </div>
       </div>
       <ul class='giftHistory'>
-        <li>查看历史红包</li>
+        <li><router-link to="/my/preferential/historyGift">查看历史红包</router-link></li>
         <span>|</span>
-        <li>红包说明</li>
+        <li><router-link to='/my/preferential/giftExplain'>红包说明</router-link></li>
       </ul>
     </section>
     <section class='like'>
@@ -230,7 +232,7 @@
           justify-content: space-between;
           padding: 0 15px;
           .giftMoney {
-            padding:1px 0 0;
+            padding: 1px 0 0;
             text-align: center;
             p:first-child {
               color: #ff0023;
@@ -240,31 +242,45 @@
               }
               margin-top:10px;
             }
-            p:nth-child(2){
-              font-size:12px;
-              margin:5px 0;
+            p:nth-child(2) {
+              font-size: 12px;
+              margin: 5px 0;
             }
           }
-          ul{
-            padding:7px 0 0;
-            h4{
-              margin-bottom:10px;
+          ul {
+            padding: 7px 0 0;
+            h4 {
+              margin-bottom: 10px;
             }
-            li{
-              color:#313131;
+            li {
+              color: #313131;
               margin-bottom: 5px;
-              font-size:12px;
+              font-size: 12px;
             }
           }
-          .giftbtn{
-            .jinri{
-              color:#ce112d;
+          .giftbtn {
+            position: relative;
+             width:54px;
+            &>div{
+              position: absolute;
+              left:0;
+              top:0;
+              right:0;
+              bottom:0;
+              margin:auto;
+              height:40px;
             }
-            .liji{
-              border:1px solid #ce112d;
+            .jinri {
               color: #ce112d;
-              border-radius:10px;
-              font-size:12px;
+              text-align:center;
+              margin-bottom:5px;
+            }
+            .liji {
+              
+              border: 1px solid #ce112d;
+              color: #ce112d;
+              border-radius: 10px;
+              font-size: 12px;
               text-align: center;
               padding: 2px;
               vertical-align: middle;

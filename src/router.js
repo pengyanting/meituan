@@ -17,6 +17,8 @@ import TradeList from './pages/my/wallet/tradeList.vue'
 import Preferential from './pages/my/preferential/preferential.vue'
 import Gift from './pages/my/preferential/gift.vue'
 import Cash from './pages/my/preferential/cash.vue'
+import HistoryGift from './pages/my/preferential/historyGift.vue'
+import GiftExplain from './pages/my/preferential/giftExplain.vue'
 
 // 外卖
 import WaiMai from './pages/waimai/waimaiMain.vue'
@@ -112,6 +114,14 @@ const routes = [{
     path: 'cash',
     component: Cash
   }]
+}, {
+  name: '历史红包',
+  path: '/my/preferential/historyGift',
+  component: HistoryGift
+}, {
+  name: '红包说明',
+  path: '/my/preferential/giftExplain',
+  component: GiftExplain
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

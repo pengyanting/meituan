@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style='background:#fff;'>
         <mt-header>
             <div slot="left">
                 <span class="icon-pos"></span>
@@ -295,6 +295,7 @@
      }
     .foodTypeBox {
         width: 100%;
+        background: #fff;
         .foodType {
             display: flex;
             flel-direction: row;

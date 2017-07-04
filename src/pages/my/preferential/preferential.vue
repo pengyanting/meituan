@@ -7,7 +7,7 @@
         <mt-tab-item id="2">代金券2张</mt-tab-item>
       </mt-navbar>
     </div>
-    <router-view></router-view>
+    <router-view class='view'></router-view>
   </div>
 </template>
 <script>
