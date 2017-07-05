@@ -21,7 +21,7 @@ import HistoryGift from './pages/my/preferential/historyGift.vue'
 import GiftExplain from './pages/my/preferential/giftExplain.vue'
 import AddressList from './pages/my/address/addressList.vue'
 import AddAdderss from './pages/my/address/addAddress.vue'
-
+import ConfirmAddress from './pages/my/address/confirmAddress.vue'
 // 外卖
 import WaiMai from './pages/waimai/waimaiMain.vue'
 import ListDetail from './pages/waimai/listDetail'
@@ -132,6 +132,10 @@ const routes = [{
   name: '新增地址',
   path: '/my/address/addAddress',
   component: AddAdderss
+}, {
+  name: '确认收货地址',
+  path: '/my/address/confirmAddress',
+  component: ConfirmAddress
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

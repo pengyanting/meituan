@@ -249,7 +249,7 @@
                 // //百度地图API功能
                 // var map = new BMap.Map("XSDFXPage");
                 // var point = new BMap.Point(116.331398, 39.897445);
-                // // map.centerAndZoom(point, 12);
+                // map.centerAndZoom(point, 12);
 
                 // function myFun(result) {
                 //     var cityName = result.name;

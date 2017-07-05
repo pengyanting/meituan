@@ -90,6 +90,7 @@
             height: 20px;
             text-align: center;
             margin-right: 3px;
+            line-height:20px;
         }
     }
 </style>
