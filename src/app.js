@@ -16,7 +16,7 @@ Vue.use(Vuerify/* 添加自定义规则 */)
 Vue.use(VuerifyDirective)
 
 // 引入状态管理
-import store from './store/store'
+import store from './store/index'
 
 // 引入rem
 import './libs/rem.js'

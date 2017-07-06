@@ -23,7 +23,7 @@
         },
         props: ['list','value'],
         mounted () {
-           console.log(this.select)
+          
         }
     }
 

@@ -6,7 +6,7 @@
                 <mt-field label="联系人" placeholder="姓名" :attr="{ maxlength: 10 }"></mt-field>
                 <Tag :list='list' @valueChange='selectSex' value=''></Tag>
                 <mt-field label="电话" placeholder="请输入手机号" type="tel"></mt-field>
-                <div @click='toMap'><mt-field label="地址" placeholder="选择收货地址" disabled class='address' ></mt-field></div>
+                <div @click='toMap'><mt-field label="地址" placeholder="选择收货地址" disabled class='address' v-model='position.address' ></mt-field></div>
                 <mt-field label="门牌号" placeholder="例：26号楼205室"></mt-field>
                 <Tag :list='Taglist' @valueChange='selectTag' value=''></Tag>
             </div>
@@ -38,6 +38,7 @@
                }],
                sex:'',
                tag:'',
+               position:{}
             }
         },
         methods:{
@@ -54,6 +55,10 @@
         components: {
             HeadTop,
             Tag
+        },
+        mounted () {
+           this.position=this.$store.state.address;
+           this.$store.dispatch('ADDRESS' ,{})
         }
     }
 
