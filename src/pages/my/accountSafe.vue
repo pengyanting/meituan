@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!--<input type="file" accept="image/*">-->
+       
         <mt-header fixed>
             <mt-button icon="back" slot='left' @click='handleBack'>账户与安全</mt-button>
         </mt-header>
@@ -52,6 +52,7 @@
             </mt-cell>
             <mt-cell title='小额免密支付'></mt-cell>
         </section>
+         <input type="file" accept="image/*">
         <!--弹框-->
         <div class='maskBox' v-if='head' @touchmove='maskMove' @click.self='maskHide'>
             <div class='maskInner'>

@@ -14,15 +14,15 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide foodType">
-                        <div class="foodTypeList" v-for="n in 8">
-                            <img src="https://fuss10.elemecdn.com/b/7e/d1890cf73ae6f2adb97caa39de7fcjpeg.jpeg" alt="">
-                            <span>美食</span>
+                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index<8'>
+                            <img :src="$root._data.url+item.image_url" alt="">
+                            <span>{{item.title}}</span>
                         </div>
                     </div>
                     <div class="swiper-slide foodType">
-                        <div class="foodTypeList" v-for="n in 8">
-                            <img src="https://fuss10.elemecdn.com/b/7e/d1890cf73ae6f2adb97caa39de7fcjpeg.jpeg" alt="">
-                            <span>甜品饮品</span>
+                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index>7'>
+                            <img :src="$root._data.url+item.image_url" alt="">
+                            <span>{{item.title}}</span>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,11 @@
         <section class="flashSale">
             <div class="flashSaleTitle">
                 <h4>限时抢购</h4>
-                <div class="flashSaleTime">距离结束<span>00</span>:<span>12</span>:<span>12</span></div>
+                <div class="flashSaleTime">距离结束
+                    <span>00</span>:
+                    <span>12</span>:
+                    <span>12</span>
+                </div>
                 <span class="more right">更多&gt;</span>
             </div>
             <div class="flashSaleList">
@@ -55,7 +59,10 @@
                         <div class="swiper-slide" v-for="item in flashSaleList" :key="item">
                             <img src="../assets/images/flashSale.png" alt="">
                             <p>{{item.title}}</p>
-                            <p><span>￥{{item.price}}</span><span>{{item.oldPrice}}</span></p>
+                            <p>
+                                <span>￥{{item.price}}</span>
+                                <span>{{item.oldPrice}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -64,7 +71,8 @@
         <div class="space"></div>
         <section class="pinzhi">
             <div class="pinzhiTitle">
-                <h4>品质优选</h4><span class="more right">更多&gt;</span>
+                <h4>品质优选</h4>
+                <span class="more right">更多&gt;</span>
             </div>
             <div class="pinzhiList">
                 <div class="pinzhiListItem" v-for="item in pinzhiList" :key="item">
@@ -96,181 +104,176 @@
     </div>
 </template>
 <script>
-    import Search from "../components/search.vue"
-    import '../libs/swiper.min.js'
-    import '../assets/swiper.min.css'
-    import List from '../components/list.vue'
-    import BMap from 'BMap'
-    import axios from "axios"
-    import FootBottom from '../components/FootBottom.vue'
-    import HeadTop from '../components/HeadTop.vue'
-    export default {
-        data() {
-            return {
-                searchList: [
-                    {
-                        name: '粥'
-                    }, {
-                        name: '周黑鸭'
-                    }, {
-                        name: '阿拉丁麻辣烫'
-                    }, {
-                        name: '米粉'
-                    }, {
-                        name: '麦当劳'
-                    }, {
-                        name: '必胜客'
-                    }
-                ],
-                bannerBottomList: [
-                    {
-                        title: '天天特价',
-                        desc: '美食1折起'
-                    }, {
-                        title: '霸王餐',
-                        desc: '领20元红包'
-                    }, {
-                        title: '营养快餐',
-                        desc: '15元吃饱'
-                    }, {
-                        title: '下单减10元',
-                        desc: '治愈系甜食'
-                    }
-                ],
-                flashSaleList: [
-                    {
-                        title: '原味鸡排+红茶+可乐',
-                        price: '9.9',
-                        oldPrice: '30'
-                    }, {
-                        title: '香辣鸡排+布丁+红茶',
-                        price: '9.9',
-                        oldPrice: '30'
-                    }, {
-                        title: '爆浆鸡块+原味奶茶+薯条',
-                        price: '9.9',
-                        oldPrice: '25'
-                    }, {
-                        title: '黑芝麻鸡蛋仔+抹茶冰激凌',
-                        price: '9.9',
-                        oldPrice: '20'
-                    }, {
-                        title: '火腿牛油果沙拉+草莓西米露',
-                        price: '19.9',
-                        oldPrice: '40'
-                    }, {
-                        title: '金牌蛋挞（2个）+卡布奇诺',
-                        price: '9.9',
-                        oldPrice: '30'
-                    }
-                ],
-                pinzhiList: [
-                    {
-                        title: '食之秘',
-                        desc: '大牌精选'
-                    }, {
-                        title: '千秋膳房',
-                        desc: '点评高分'
-                    }, {
-                        title: '食其家',
-                        desc: '大牌精选'
-                    }, {
-                        title: '肯德基宅急送',
-                        desc: '大牌精选'
-                    }, {
-                        title: '必胜客宅急送',
-                        desc: '大牌精选'
-                    }, {
-                        title: '红料理',
-                        desc: '点评高分'
-                    }, {
-                        title: '唐质保中式料理',
-                        desc: '热销好店'
-                    }, {
-                        title: '静安面包房',
-                        desc: '热销好店'
-                    }
-                ],
-                pinzhiBottomList: [
-                    {
-                        title: '推荐有奖',
-                        desc: '5元现金拿不停'
-                    }, {
-                        title: '领券中心',
-                        desc: '代金券免费领'
-                    }
-                ]
-            }
-        },
-        mounted() {
-            //初始化swiper
-            new Swiper('.foodTypeBox .swiper-container', {
-                pagination: '.swiper-pagination',
-                loop: true
-            });
-            var mySwiper = new Swiper('.flashSaleList .swiper-container', {
-                slidesPerView: 3.5,
-                slidesPerGroup: 1,
-            })
-            this.ready();
-        },
-        methods: {
-            ready: function () {
-
-                // var map = new BMap.Map('XSDFXPage');
-                // var point = new BMap.Point(104.075796, 30.659684);
-                // map.centerAndZoom(new BMap.Point(104.047404, 30.696035), 14);
-                // map.addControl(new BMap.MapTypeControl());
-                // map.setCurrentCity('小龙坎火锅');
-                // map.enableScrollWheelZoom(true);
-                // map.enableDoubleClickZoom(true);
-                // var marker = new BMap.Marker(point);
-                // map.addOverlay(marker);
-              
-                // var map = new BMap.Map("XSDFXPage");
-                // var point = new BMap.Point(116.331398, 39.897445);
-                // map.centerAndZoom(point, 12);
-
-                // var geolocation = new BMap.Geolocation();
-                // geolocation.getCurrentPosition(function (r) {
-                //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                //         var mk = new BMap.Marker(r.point);
-                //         map.addOverlay(mk);
-                //         map.panTo(r.point);
-                //         console.log(r)
-                //         // alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-                //         var latlon = r.point.lat+','+r.point.lng;
-                //         axios.get("http://api.map.baidu.com/geocoder/v2/?ak=9yIDfOHS7MwQHqSqGR7F6CIpSEI2SrvV&callback=renderReverse&location="+latlon+"&output=json&pois=0").then(function (res) {
-                //             console.log(res)
-                //         })
-                //     }
-                //     else {
-                //         alert('failed' + this.getStatus());
-                //     }
-                // }, { enableHighAccuracy: true })
-
-                // //百度地图API功能
-                // var map = new BMap.Map("XSDFXPage");
-                // var point = new BMap.Point(116.331398, 39.897445);
-                // // map.centerAndZoom(point, 12);
-
-                // function myFun(result) {
-                //     var cityName = result.name;
-                //     map.setCenter(cityName);
-                //     alert("当前定位城市:" + cityName);
-                // }
-                // var myCity = new BMap.LocalCity();
-                // myCity.get(myFun);
-            }
-        },
-        props: ['foodList'],
-        components: {
-            Search,
-            List,
-            FootBottom,
-            HeadTop
+import Search from "../components/search.vue"
+import '../libs/swiper.min.js'
+import '../assets/swiper.min.css'
+import List from '../components/list.vue'
+import BMap from 'BMap'
+import axios from "axios"
+import FootBottom from '../components/FootBottom.vue'
+import HeadTop from '../components/HeadTop.vue'
+export default {
+    data() {
+        return {
+            categoryList: [],
+            recommendList: [],
+            searchList: [
+                {
+                    name: '粥'
+                }, {
+                    name: '周黑鸭'
+                }, {
+                    name: '阿拉丁麻辣烫'
+                }, {
+                    name: '米粉'
+                }, {
+                    name: '麦当劳'
+                }, {
+                    name: '必胜客'
+                }
+            ],
+            bannerBottomList: [
+                {
+                    title: '天天特价',
+                    desc: '美食1折起'
+                }, {
+                    title: '霸王餐',
+                    desc: '领20元红包'
+                }, {
+                    title: '营养快餐',
+                    desc: '15元吃饱'
+                }, {
+                    title: '下单减10元',
+                    desc: '治愈系甜食'
+                }
+            ],
+            flashSaleList: [
+                {
+                    title: '原味鸡排+红茶+可乐',
+                    price: '9.9',
+                    oldPrice: '30'
+                }, {
+                    title: '香辣鸡排+布丁+红茶',
+                    price: '9.9',
+                    oldPrice: '30'
+                }, {
+                    title: '爆浆鸡块+原味奶茶+薯条',
+                    price: '9.9',
+                    oldPrice: '25'
+                }, {
+                    title: '黑芝麻鸡蛋仔+抹茶冰激凌',
+                    price: '9.9',
+                    oldPrice: '20'
+                }, {
+                    title: '火腿牛油果沙拉+草莓西米露',
+                    price: '19.9',
+                    oldPrice: '40'
+                }, {
+                    title: '金牌蛋挞（2个）+卡布奇诺',
+                    price: '9.9',
+                    oldPrice: '30'
+                }
+            ],
+            pinzhiList: [
+                {
+                    title: '食之秘',
+                    desc: '大牌精选'
+                }, {
+                    title: '千秋膳房',
+                    desc: '点评高分'
+                }, {
+                    title: '食其家',
+                    desc: '大牌精选'
+                }, {
+                    title: '肯德基宅急送',
+                    desc: '大牌精选'
+                }, {
+                    title: '必胜客宅急送',
+                    desc: '大牌精选'
+                }, {
+                    title: '红料理',
+                    desc: '点评高分'
+                }, {
+                    title: '唐质保中式料理',
+                    desc: '热销好店'
+                }, {
+                    title: '静安面包房',
+                    desc: '热销好店'
+                }
+            ],
+            pinzhiBottomList: [
+                {
+                    title: '推荐有奖',
+                    desc: '5元现金拿不停'
+                }, {
+                    title: '领券中心',
+                    desc: '代金券免费领'
+                }
+            ]
         }
+    },
+    created() {
+
+    },
+    mounted() {
+        //初始化swiper
+        new Swiper('.foodTypeBox .swiper-container', {
+            pagination: '.swiper-pagination',
+            loop: true
+        });
+        var mySwiper = new Swiper('.flashSaleList .swiper-container', {
+            slidesPerView: 3.5,
+            slidesPerGroup: 1,
+        })
+        this.getCategoryList();
+        this.getRecommendList();
+    },
+    methods: {
+        getCategoryList () {
+            var vm = this;
+            axios.get(vm.$root._data.apiUrl + 'v2/index_entry').then(res => {
+                var res = res.data;
+                if (res.length > 0) {
+                    vm.categoryList = res;
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        getRecommendList() {
+            var geolocation = new BMap.Geolocation()
+            var vm = this;
+            geolocation.getCurrentPosition(function (position) {
+                alert(1)
+                var x = position.point.lng;
+                var y = position.point.lat;
+                axios.get(vm.$root._data.apiUrl + 'shopping/restaurants',{
+                    latitude:y,
+                    longitude:x
+                }).then(res => {
+                    console.log(res)
+                    var res = res.data;
+                    
+                    if (res.length > 0) {
+                        vm.categoryList = res;
+                    }
+                }).catch(error => {
+                    console.log(error)
+                })
+
+            });
+
+        }
+    },
+    props: ['foodList'],
+    components: {
+        Search,
+        List,
+        FootBottom,
+        HeadTop
     }
+
+}
 
 </script>
 <style lang="sass" scoped>
