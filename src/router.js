@@ -23,9 +23,10 @@ import AddressList from './pages/my/address/addressList.vue'
 import AddAdderss from './pages/my/address/addAddress.vue'
 import ConfirmAddress from './pages/my/address/confirmAddress.vue'
 import SearchAddress from './pages/my/address/searchAddress.vue'
+import Collection from './pages/my/collection/collection.vue'
 // 外卖
 import WaiMai from './pages/waimai/waimaiMain.vue'
-import ListDetail from './pages/waimai/listDetail'
+import ListDetail from './components/listDetail'
 
 // 发现
 import Find from './pages/find/findMain.vue'
@@ -141,6 +142,10 @@ const routes = [{
   name: '定位搜索',
   path: '/my/address/searchAddress',
   component: SearchAddress
+}, {
+  name: '我的收藏',
+  path: '/my/collection/collection',
+  component: Collection
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

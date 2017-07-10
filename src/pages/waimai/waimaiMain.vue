@@ -88,7 +88,7 @@
         <section class='introList'>
             <h4 class='title'>推荐商家</h4>
             <div v-for='item in $root._data.list.list' :key='item'>
-                <List :foodList='item'></List>
+                <List :foodList='item' active></List>
             </div>
         </section>
         <div class='space'></div>
@@ -98,7 +98,7 @@
     import Search from "../../components/search.vue"
     import '../../libs/swiper.min.js'
     import '../../assets/swiper.min.css'
-    import List from './list.vue'
+    import List from '../../components/list.vue'
     import BMap from 'BMap'
     import axios from "axios"
     export default {

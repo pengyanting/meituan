@@ -67,7 +67,8 @@
                         links: '/my/address/addressList'
                     }, {
                         title: '我的收藏',
-                        icon: './src/assets/images/my-left-icon2.png'
+                        icon: './src/assets/images/my-left-icon2.png',
+                        links: '/my/collection/collection'
                     }, {
                         title: '积分商城',
                         icon: './src/assets/images/my-left-icon3.png'

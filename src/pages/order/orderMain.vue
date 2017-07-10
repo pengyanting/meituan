@@ -3,7 +3,7 @@
         <mt-header fixed>
             <span slot="left">订单</span>
         </mt-header>
-        <div style="margin-top: 40px;">
+        <!--<div style="margin-top: 40px;">
             <mt-navbar v-model="selected">
                 <mt-tab-item id="1">外卖</mt-tab-item>
                 <mt-tab-item id="2">早餐</mt-tab-item>
@@ -16,7 +16,8 @@
                     <NoLogin text='登陆后查看早餐订单' imgUrl='./src/assets/images/order-nologin1.png'></NoLogin>
                 </mt-tab-container-item>
             </mt-tab-container>
-        </div>
+        </div>-->
+        
         <FootBottom title='订单'></FootBottom>
     </div>
 </template>

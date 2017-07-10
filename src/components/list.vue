@@ -1,13 +1,13 @@
 <template>
     <div>
-        <router-link to="/waimai/listDetail" style='padding:25px 10px;border-bottom:1px solid #DFDDD8;display:flex;'>
+        <div style='padding:25px 10px;border-bottom:1px solid #DFDDD8;display:flex;background:#fff;'>
             <div class='food_pic'>
-                <img src='../../assets/images/kfc.png' alt="肯德基">
+                <img src='../assets/images/kfc.png' alt="肯德基">
             </div>
             <div class='food_text'>
                 <section>
                     <h3 class='food_title'>
-                        <img v-show='foodList.isadImg' src="../../assets/images/pinpai.png" alt="">
+                        <img v-show='foodList.isadImg' src="../assets/images/pinpai.png" alt="">
                         <span>{{foodList.title}}</span>
                         <span class='bao'>保</span>
                         <span class='bao'>保</span>
@@ -30,48 +30,58 @@
                             <li>40分钟</li>
                         </ul>
                     </div>
-                    <div class='active'>
+                    <div class='active' v-if='active'>
                         <ul :class="{'activeClass':isActive}">
                             <li v-for='(item,index) in foodList.activelist' :key='item'>
                                 <span :class="{'jian':item.youhui=='减','te':item.youhui=='特','zhe':item.youhui=='折','xin':item.youhui=='新','ling':item.youhui=='领'}">
-                            {{item.youhui}}
-                            </span>
+                                    {{item.youhui}}
+                                </span>
                                 <span>{{item.title}}</span>
                             </li>
                         </ul>
                         <div class='activeNum' @click.stop.prevent='handleActive' v-if='foodList.activelist.length>2'>
-                            {{foodList.activelist.length}}个活动<img src="../../assets/images/sanjiao.png" alt="">
+                            {{foodList.activelist.length}}个活动
+                            <img src="../assets/images/sanjiao.png" alt="">
                         </div>
                     </div>
                 </section>
             </div>
-        </router-link>
+        </div>
     </div>
 </template>
 <script>
-    import StarLevel from '../../components/starLevel.vue'
-    export default {
-        data() {
-            return {
-                isActive: false
-            }
+import StarLevel from './starLevel.vue'
+export default {
+    data() {
+        return {
+            isActive: false
+        }
+    },
+    methods: {
+        handleActive() {
+            this.isActive = !this.isActive;
         },
-        methods: {
-            handleActive() {
-                this.isActive = !this.isActive;
-            },
-            toListDetail() {
+        toListDetail() {
 
-            }
-        },
-        mounted() {
+        }
+    },
+    mounted() {
 
-        },
-        props: ['foodList'],
-        components: {
-            StarLevel
+    },
+    props: ['foodList', 'active'],
+    components: {
+        StarLevel
+    },
+    computed: {
+        actives() {
+            if (this.active == undefined) {
+                this.active = false
+            } else if (this.active == '') {
+                this.active = true
+            }
         }
     }
+}
 
 </script>
 <style lang="sass">
@@ -84,13 +94,11 @@
     }
     
     .food_text {
-        margin-top: 5px;
         margin-left: 10px;
         flex-shrink: 0;
         flex-grow: 1;
         .food_title {
             width: 100%;
-            padding: 5px 0;
             display: flex;
             overflow: hidden;
             line-height: 21px;
@@ -132,9 +140,7 @@
             display: flex;
             margin-top: 5px;
             justify-content: space-between;
-            border-bottom: 1px dashed #ccc;
             padding-bottom: 10px;
-            margin-bottom: 10px;
             ul {
                 padding: 0;
                 margin: 0;
@@ -157,6 +163,8 @@
         .active {
             display: flex;
             justify-content: space-between;
+             border-top: 1px dashed #ccc;
+             padding-top:10px;
             ul {
                 margin: 0;
                 padding: 0;

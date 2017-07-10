@@ -2,7 +2,7 @@
     <div>
         <div class='hd_box'>
             <mt-header>
-                <router-link to="/" slot="left">
+                <router-link to="/my" slot="left">
                     <mt-button icon="back"></mt-button>
                 </router-link>
                 <mt-button slot="right" icon="more"></mt-button>
@@ -14,7 +14,7 @@
                         <div class='food_text'>
                             <section>
                                 <h3 class='food_title'>
-                                    <img src="../../assets/images/pinpai.png" alt="">
+                                    <img src="../assets/images/pinpai.png" alt="">
                                     <span>必胜客宅急送（锦秋店）</span>
                                 </h3>
                                 <div class='peisongs'>
@@ -29,7 +29,7 @@
                             </section>
                         </div>
                     </div>
-                    <img slot="icon" src="../../assets/images/kfc.png" width="100" height="100">
+                    <img slot="icon" src="../assets/images/kfc.png" width="100" height="100">
                 </mt-cell>
             </div>
         </div>
@@ -68,7 +68,7 @@
                                     </li>
                                     <li class='foodPrice'>￥6</li>
                                 </ul>
-                                <img slot="icon" src="../../assets/images/food.png" width="62" height="57">
+                                <img slot="icon" src="../assets/images/food.png" width="62" height="57">
                             </mt-cell>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
 </script>
 <style lang='sass'>
     .hd_box {
-        background: url(../../assets/images/bg.png) no-repeat center;
+        background: url(../assets/images/bg.png) no-repeat center;
         background-size: cover;
         position: fixed;
         left: 0;
