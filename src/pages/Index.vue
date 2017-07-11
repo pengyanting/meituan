@@ -95,8 +95,8 @@
         <div class='space'></div>
         <section class='introList'>
             <h4 class='title'>推荐商家</h4>
-            <div v-for='item in $root._data.list.list' :key='item'>
-                <List :foodList='item'></List>
+            <div v-for='item in recommendList' :key='item' @click='toDetail(item)'>
+                <List :foodList='item' active></List>
             </div>
         </section>
         <div class='space'></div>
@@ -227,9 +227,10 @@ export default {
         })
         this.getCategoryList();
         this.getRecommendList();
+        console.log(this.active)
     },
     methods: {
-        getCategoryList () {
+        getCategoryList() {
             var vm = this;
             axios.get(vm.$root._data.apiUrl + 'v2/index_entry').then(res => {
                 var res = res.data;
@@ -244,25 +245,26 @@ export default {
             var geolocation = new BMap.Geolocation()
             var vm = this;
             geolocation.getCurrentPosition(function (position) {
-                alert(1)
                 var x = position.point.lng;
                 var y = position.point.lat;
-                axios.get(vm.$root._data.apiUrl + 'shopping/restaurants',{
-                    latitude:y,
-                    longitude:x
+                axios.get(vm.$root._data.apiUrl + 'shopping/restaurants', {
+                    params: {
+                        latitude: y,
+                        longitude: x
+                    }
                 }).then(res => {
-                    console.log(res)
                     var res = res.data;
-                    
                     if (res.length > 0) {
-                        vm.categoryList = res;
+                        vm.recommendList = res;
                     }
                 }).catch(error => {
                     console.log(error)
                 })
 
             });
-
+        },
+        toDetail(val){
+           this.$router.push({'path':'/waimai/listDetail','query':{id:val.id}})
         }
     },
     props: ['foodList'],

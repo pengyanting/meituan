@@ -53,7 +53,8 @@ new Vue({
   data: {
     list: datas,
     apiUrl: 'http://cangdu.org:8001/',
-    url: 'https://fuss10.elemecdn.com/'
+    url: 'https://fuss10.elemecdn.com/',
+    imgUrl: 'http://images.cangdu.org/'
   },
   render: h => h(App)
 }).$mount('#app')

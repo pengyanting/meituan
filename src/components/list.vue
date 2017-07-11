@@ -2,45 +2,42 @@
     <div>
         <div style='padding:25px 10px;border-bottom:1px solid #DFDDD8;display:flex;background:#fff;'>
             <div class='food_pic'>
-                <img src='../assets/images/kfc.png' alt="肯德基">
+                <img  :src='$root._data.imgUrl+foodList.image_path' alt="">
             </div>
             <div class='food_text'>
                 <section>
                     <h3 class='food_title'>
-                        <img v-show='foodList.isadImg' src="../assets/images/pinpai.png" alt="">
-                        <span>{{foodList.title}}</span>
-                        <span class='bao'>保</span>
-                        <span class='bao'>保</span>
+                        <img v-show='foodList.is_premium' src='../assets/images/pinpai.png' alt="">
+                        <span>{{foodList.name}}</span>
+                        <span class='bao' v-for='n in foodList.supports'>{{n.icon_name}}</span>
                     </h3>
                     <div class='sell'>
-                        <StarLevel class='satrScore' :score='foodList.score'></StarLevel>
-                        <span class='sellNum'>月售{{foodList.sellNum}}单</span>
+                        <StarLevel class='satrScore' :score='foodList.rating'></StarLevel>
+                        <span class='sellNum'>月售{{foodList.recent_order_num}}单</span>
                     </div>
                     <div class='peisong'>
                         <ul class='peisongfei'>
-                            <li>￥{{foodList.qisongfei}}元起送</li>
+                            <li>￥{{foodList.float_minimum_order_amount}}元起送</li>
                             <span>|</span>
-                            <li>配送费￥{{foodList.peisongfei}}</li>
-                            <span>|</span>
-                            <li>￥{{foodList.renjun}}/人</li>
+                            <li>{{foodList.piecewise_agent_fee.tips}}</li>
                         </ul>
                         <ul class='distance'>
-                            <li>450m</li>
+                            <li>{{foodList.distance}}</li>
                             <span>|</span>
-                            <li>40分钟</li>
+                            <li>{{foodList.order_lead_time}}</li>
                         </ul>
                     </div>
-                    <div class='active' v-if='active'>
+                    <div class='active' v-if='active!=undefined'>
                         <ul :class="{'activeClass':isActive}">
-                            <li v-for='(item,index) in foodList.activelist' :key='item'>
-                                <span :class="{'jian':item.youhui=='减','te':item.youhui=='特','zhe':item.youhui=='折','xin':item.youhui=='新','ling':item.youhui=='领'}">
-                                    {{item.youhui}}
+                            <li v-for='(item,index) in foodList.activities' :key='item'>
+                                <span :class="{'jian':item.icon_name=='减','te':item.icon_name=='特','zhe':item.icon_name=='折','xin':item.icon_name=='新','ling':item.icon_name=='领'}">
+                                    {{item.icon_name}}
                                 </span>
-                                <span>{{item.title}}</span>
+                                <span>{{item.description}}</span>
                             </li>
                         </ul>
-                        <div class='activeNum' @click.stop.prevent='handleActive' v-if='foodList.activelist.length>2'>
-                            {{foodList.activelist.length}}个活动
+                        <div class='activeNum' @click.stop.prevent='handleActive' v-if='foodList.activities.length>2'>
+                            {{foodList.activities.length}}个活动
                             <img src="../assets/images/sanjiao.png" alt="">
                         </div>
                     </div>
@@ -73,13 +70,7 @@ export default {
         StarLevel
     },
     computed: {
-        actives() {
-            if (this.active == undefined) {
-                this.active = false
-            } else if (this.active == '') {
-                this.active = true
-            }
-        }
+        
     }
 }
 
