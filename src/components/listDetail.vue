@@ -62,10 +62,10 @@
                                         </li>
                                         <li class='foodPrice'>￥{{item.specfoods[0].price}}</li>
                                     </ul>
-                                    <div  class='quantity'>
-                                        <img v-if='item.quantity' src="../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item)'>
-                                        <span v-if='item.quantity'>{{item.quantity}}</span>
-                                        <img src="../assets/images/add.png" width="20" height="20"  @click='addFood(item)'>
+                                    <div class='quantity'>
+                                        <img v-if='entities[item.item_id]' src="../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item)'>
+                                        <span>{{reversedMessage}}</span>
+                                        <img src="../assets/images/add.png" width="20" height="20" @click='addFood(item)'>
                                     </div>
                                     <img slot="icon" :src="$root._data.imgUrl+item.image_path" width="62" height="57">
                                 </mt-cell>
@@ -104,7 +104,9 @@ export default {
             foodList: [],
             isActive: '',
             tips: {},
-            quantity:0
+            entities: [],
+            itemId: '',
+            aa: 0
         }
     },
     methods: {
@@ -156,12 +158,35 @@ export default {
 
         },
         addFood(obj) {
-           obj.quantity=0;
-           obj.quantity++;
-           console.log(obj)
+            //判断购物车是否已存在该food
+            this.itemId = obj.item_id;
+            if (this.entities.length==0||this.entities.length==undefined) {//购物车为空时
+                var param = {
+                    attrs: obj.attrs,
+                    extra: {},
+                    id: obj.item_id,
+                    name: obj.name,
+                    packing_fee: obj.specfoods[0].packing_fee,
+                    price: obj.specfoods[0].price,
+                    quantity: 1,
+                    sku_id: obj.specfoods[0].sku_id,
+                    specs: obj.specfoods[0].specs,
+                    stock: obj.specfoods[0].stock
+                }
+                this.entities.push(param) 
+            } else {
+                this.entities[0].quantity += 1;
+                // console.log(this.entities[obj.item_id].quantity)
+            }
+
+            console.log(this.reversedMessage)
         },
-        reduceFood(obj){
-            
+        reduceFood(obj) {
+            if (obj.quantity == undefined) {
+                obj.quantity = 1;
+            } else {
+                obj.quantity += 1;
+            }
         }
     },
     created() {
@@ -171,6 +196,11 @@ export default {
     },
     mounted() {
 
+    },
+    computed: {
+        reversedMessage: function () {
+            return this.entities
+        }
     }
 }
 
