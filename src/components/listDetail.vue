@@ -48,7 +48,7 @@
                         </ul>
                     </div>
                     <div class='goodsList'>
-                        <div v-for='n in foodList' :key='n'>
+                        <div v-for='(n,index) in foodList' :key='n'>
                             <div class='goodsList-title'>
                                 <span>{{n.name}}</span>{{n.description}}
                             </div>
@@ -63,9 +63,9 @@
                                         <li class='foodPrice'>￥{{item.specfoods[0].price}}</li>
                                     </ul>
                                     <div class='quantity'>
-                                        <img v-if='entities[item.item_id]' src="../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item)'>
-                                        <span>{{reversedMessage}}</span>
-                                        <img src="../assets/images/add.png" width="20" height="20" @click='addFood(item)'>
+                                        <img v-if='quantity.id==item.item_id' src="../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item,index)'>
+                                        <span v-if='quantity.id==item.item_id'>{{quantity.quantity}}</span>
+                                        <img src="../assets/images/add.png" width="20" height="20" @click='addFood(item,index)'>
                                     </div>
                                     <img slot="icon" :src="$root._data.imgUrl+item.image_path" width="62" height="57">
                                 </mt-cell>
@@ -78,20 +78,13 @@
                 </mt-tab-container-item>
             </mt-tab-container>
         </div>
-        <section class='footer'>
-            <div class='tips'>满20减5</div>
-            <div class='shopCar'>
-                <div class='car'>
-                    <span class='shop-car'></span>
-                </div>
-                <span>未选购商品</span>
-            </div>
-            <div class='btn'>还差￥66起送</div>
-        </section>
+        <Car :totalList='products'></Car>
     </div>
 </template>
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
+import Car from '../components/car.vue'
 export default {
     data() {
         return {
@@ -104,9 +97,8 @@ export default {
             foodList: [],
             isActive: '',
             tips: {},
-            entities: [],
-            itemId: '',
-            aa: 0
+            entities: {},
+            itemId: ''
         }
     },
     methods: {
@@ -129,7 +121,7 @@ export default {
                 actualTop += current.offsetTop;
                 current = current.offsetParent;
             }
-            console.log(actualTop)
+            // console.log(actualTop)
         },
         end(e) {
             this.endY = e.changedTouches[0].clientY;
@@ -150,36 +142,28 @@ export default {
             }).then(res => {
                 vm.foodList = res.data
                 vm.isActive = vm.foodList[0].name;
-                console.log(vm.foodList);
+
+
+                // console.log(vm.foodList);
             })
         },
         handleclick(obj) {
             this.isActive = obj.name;
 
         },
-        addFood(obj) {
-            //判断购物车是否已存在该food
+        addFood(obj, index) {
+            // this.item=obj;
+            // console.log(this.item.quantity)
+            // if (this.item.quantity == undefined) {
+            //     this.item.quantity = 1;
+            // } else {
+            //     this.item.quantity += 1;
+            // }
+            // console.log(this.reversedMessage)
             this.itemId = obj.item_id;
-            if (this.entities.length==0||this.entities.length==undefined) {//购物车为空时
-                var param = {
-                    attrs: obj.attrs,
-                    extra: {},
-                    id: obj.item_id,
-                    name: obj.name,
-                    packing_fee: obj.specfoods[0].packing_fee,
-                    price: obj.specfoods[0].price,
-                    quantity: 1,
-                    sku_id: obj.specfoods[0].sku_id,
-                    specs: obj.specfoods[0].specs,
-                    stock: obj.specfoods[0].stock
-                }
-                this.entities.push(param) 
-            } else {
-                this.entities[0].quantity += 1;
-                // console.log(this.entities[obj.item_id].quantity)
-            }
-
-            console.log(this.reversedMessage)
+            this.$store.dispatch('addToCart', { 'obj': obj, 'index': index });
+            this.$store.dispatch('GET_ALL_FOODS', this.foodList[index].foods)
+            console.log(this.products)
         },
         reduceFood(obj) {
             if (obj.quantity == undefined) {
@@ -193,79 +177,33 @@ export default {
         this.id = this.$route.query.id;
         this.getDetail();
         this.getFood();
+        console.log(this.products)
     },
     mounted() {
 
     },
+    components: {
+        Car
+    },
     computed: {
-        reversedMessage: function () {
-            return this.entities
+        ...mapGetters({
+            products: 'cartProducts',
+            quantity: 'quantity'
+        }),
+        quantity: function () {
+            for (var i = 0; i < this.products.length; i++) {
+                if (this.itemId == this.products[i].id) {
+                    return this.products[i]
+                }
+            }
+            return ''
         }
     }
 }
 
 </script>
 <style lang='sass' scoped>
-  @import '../assets/scss/iconFont.scss';
-  .footer{
-      width:100%;
-      height:50px;
-      position:fixed;
-      left:0;
-      bottom:0;
-      background:rgba(0,0,0,0.96);
-      color:#9a9a9a;
-      .shopCar{
-          position:relative;
-          float:left;
-          &>span{
-            display:block;
-            line-height:50px;
-            margin-left:80px;
-            font-size:12px;
-          }
-          .car{
-              width:60px;
-              height:60px;
-              background:#333333;
-              border:10px solid rgba(0,0,0,0.96);
-              border-radius:50%;
-              text-align:center;
-              position:absolute;
-              left:10px;
-              top:-15px;
-              line-height:45px;
-              box-shadow:0px -4px 18px rgba(0,0,0,0.4);
-          }
-          .shop-car:before{
-              color:#757575;
-              font-size:20px;
-          }
-         
-      }
-       .tips{
-            width:100%;
-            height:30px;
-            background:#fefad7;
-            opacity:0.9;
-            color:#0f0f0f;
-            line-height:30px;
-            text-align:center;
-            position:absolute;
-            left:0px;
-            top:-30px;
-            font-size:12px;
-           }
-      .btn{
-          float:right;
-          height:100%;
-          padding:0 10px;
-          background:#525355;
-          display:flex;
-          align-items:center;
-          font-size:12px;
-      }
-  }
+  
 </style>
 
 <style lang='sass'>
