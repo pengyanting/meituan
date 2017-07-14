@@ -14,7 +14,7 @@
                         <div class='food_text'>
                             <section>
                                 <h3 class='food_title'>
-                                    <img v-if='detail.is_premium' src="../assets/images/pinpai.png" alt="">
+                                    <img v-if='detail.is_premium' src="../../assets/images/pinpai.png" alt="">
                                     <span>{{detail.name}}</span>
                                 </h3>
                                 <div class='peisongs'>
@@ -37,58 +37,62 @@
             <mt-navbar class="page-part" v-model="selected">
                 <mt-tab-item id="1">商品</mt-tab-item>
                 <mt-tab-item id="2">评价
-                    <span style='color: #ff5f00;'>（4.6分）</span>
+                    <span style='color: #ff5f00;'>（{{score.overall_score}}分）</span>
                 </mt-tab-item>
             </mt-navbar>
-            <mt-tab-container v-model="selected" style='height:100%;overflow:auto;'>
-                <mt-tab-container-item id="1" style='display:flex;height:100%;overflow:auto;'>
-                    <div class='goodsType'>
-                        <ul>
-                            <li v-for='n in foodList' @click='handleclick(n)' :key='n' :class="{'active':isActive==n.name}">{{n.name}}</li>
-                        </ul>
-                    </div>
-                    <div class='goodsList'>
-                        <div v-for='(n,index) in foodList' :key='n'>
-                            <div class='goodsList-title'>
-                                <span>{{n.name}}</span>{{n.description}}
-                            </div>
-                            <div class='goodsList-item' v-for='item in n.foods' :key='item'>
-                                <mt-cell title="" icon="more">
-                                    <ul>
-                                        <li class='foodName'>{{item.name}}</li>
-                                        <li class='foodSell'>
-                                            <span>月售{{item.month_sales}}份</span>
-                                            <span>好评{{item.rating_count}}</span>
-                                        </li>
-                                        <li class='foodPrice'>￥{{item.specfoods[0].price}}</li>
-                                    </ul>
-                                    <div class='quantity'>
-                                        <img v-if='quantity.id==item.item_id' src="../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item,index)'>
-                                        <span v-if='quantity.id==item.item_id'>{{quantity.quantity}}</span>
-                                        <img src="../assets/images/add.png" width="20" height="20" @click='addFood(item,index)'>
-                                    </div>
-                                    <img slot="icon" :src="$root._data.imgUrl+item.image_path" width="62" height="57">
-                                </mt-cell>
+            <mt-tab-container v-model="selected" style='height:100%;overflow:auto;background:#fff;'>
+                <mt-tab-container-item id="1">
+                    <div style='display:flex;height:100%;overflow:auto;'>
+                        <div class='goodsType'>
+                            <ul>
+                                <li v-for='n in foodList' @click='handleclick(n)' :key='n' :class="{'active':isActive==n.name}">{{n.name}}</li>
+                            </ul>
+                        </div>
+                        <div class='goodsList'>
+                            <div v-for='(n,index) in foodList' :key='n'>
+                                <div class='goodsList-title'>
+                                    <span>{{n.name}}</span>{{n.description}}
+                                </div>
+                                <div class='goodsList-item' v-for='item in n.foods' :key='item'>
+                                    <mt-cell title="" icon="more">
+                                        <ul>
+                                            <li class='foodName'>{{item.name}}</li>
+                                            <li class='foodSell'>
+                                                <span>月售{{item.month_sales}}份</span>
+                                                <span>好评{{item.rating_count}}</span>
+                                            </li>
+                                            <li class='foodPrice'>￥{{item.specfoods[0].price}}</li>
+                                        </ul>
+                                        <div class='quantity'>
+                                            <img v-if='quantity.id==item.item_id' src="../../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item,index)'>
+                                            <span v-if='quantity.id==item.item_id'>{{quantity.quantity}}</span>
+                                            <img src="../../assets/images/add.png" width="20" height="20" @click='addFood(item,index)'>
+                                        </div>
+                                        <img slot="icon" :src="$root._data.imgUrl+item.image_path" width="62" height="57">
+                                    </mt-cell>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <Car :totalList='products'></Car>
                 </mt-tab-container-item>
                 <mt-tab-container-item id="2">
-                    <mt-cell v-for="n in 4" :title="'测试 ' + n" :key='n' />
+                    <Comment :score='score' :id='id'></Comment>
                 </mt-tab-container-item>
             </mt-tab-container>
         </div>
-        <Car :totalList='products'></Car>
+    
     </div>
 </template>
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
-import Car from '../components/car.vue'
+import Car from '../../components/car.vue'
+import Comment from './comment.vue'
 export default {
     data() {
         return {
-            selected: '1',
+            selected: '2',
             moveY: '',
             startY: '',//触摸点的位置
             endY: '',
@@ -98,7 +102,8 @@ export default {
             isActive: '',
             tips: {},
             entities: {},
-            itemId: ''
+            itemId: '',
+            score: {}
         }
     },
     methods: {
@@ -147,9 +152,16 @@ export default {
                 // console.log(vm.foodList);
             })
         },
+        getRateScore() {
+            var vm = this;
+            axios.get(vm.$root._data.apiUrl + 'ugc/v2/restaurants/' + vm.id + '/ratings/scores').then(res => {
+                console.log(res.data)
+                vm.score = res.data
+                vm.score.overall_score=vm.score.overall_score.toFixed(1)
+            })
+        },
         handleclick(obj) {
             this.isActive = obj.name;
-
         },
         addFood(obj, index) {
             // this.item=obj;
@@ -163,7 +175,6 @@ export default {
             this.itemId = obj.item_id;
             this.$store.dispatch('addToCart', { 'obj': obj, 'index': index });
             this.$store.dispatch('GET_ALL_FOODS', this.foodList[index].foods)
-            console.log(this.products)
         },
         reduceFood(obj) {
             if (obj.quantity == undefined) {
@@ -177,13 +188,13 @@ export default {
         this.id = this.$route.query.id;
         this.getDetail();
         this.getFood();
-        console.log(this.products)
+        this.getRateScore();
     },
     mounted() {
-
     },
     components: {
-        Car
+        Car,
+        Comment
     },
     computed: {
         ...mapGetters({
@@ -208,7 +219,7 @@ export default {
 
 <style lang='sass'>
     .hd_box {
-        background: url(../assets/images/bg.png) no-repeat center;
+        background: url(../../assets/images/bg.png) no-repeat center;
         background-size: cover;
         position: fixed;
         left: 0;

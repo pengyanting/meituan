@@ -7,9 +7,9 @@
             <div class='food_text'>
                 <section>
                     <h3 class='food_title'>
-                        <img v-show='foodList.is_premium' src='../assets/images/pinpai.png' alt="">
+                        <img v-show='foodList.is_premium' src='../../assets/images/pinpai.png' alt="">
                         <span>{{foodList.name}}</span>
-                        <span class='bao' v-for='n in foodList.supports'>{{n.icon_name}}</span>
+                        <span class='bao' v-for='n in foodList.supports' :key='n'>{{n.icon_name}}</span>
                     </h3>
                     <div class='sell'>
                         <StarLevel class='satrScore' :score='foodList.rating'></StarLevel>
@@ -38,7 +38,7 @@
                         </ul>
                         <div class='activeNum' @click.stop.prevent='handleActive' v-if='foodList.activities.length>2'>
                             {{foodList.activities.length}}个活动
-                            <img src="../assets/images/sanjiao.png" alt="">
+                            <img src="../../assets/images/sanjiao.png" alt="">
                         </div>
                     </div>
                 </section>
@@ -47,7 +47,7 @@
     </div>
 </template>
 <script>
-import StarLevel from './starLevel.vue'
+import StarLevel from '../../components/starLevel.vue'
 export default {
     data() {
         return {

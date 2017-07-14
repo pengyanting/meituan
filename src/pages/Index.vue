@@ -107,7 +107,7 @@
 import Search from "../components/search.vue"
 import '../libs/swiper.min.js'
 import '../assets/swiper.min.css'
-import List from '../components/list.vue'
+import List from '../pages/waimai/list.vue'
 import BMap from 'BMap'
 import axios from "axios"
 import FootBottom from '../components/FootBottom.vue'

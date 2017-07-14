@@ -25,8 +25,7 @@ import ConfirmAddress from './pages/my/address/confirmAddress.vue'
 import SearchAddress from './pages/my/address/searchAddress.vue'
 import Collection from './pages/my/collection/collection.vue'
 // 外卖
-import WaiMai from './pages/waimai/waimaiMain.vue'
-import ListDetail from './components/listDetail'
+import ListDetail from './pages/waimai/listDetail'
 
 // 发现
 import Find from './pages/find/findMain.vue'
@@ -51,10 +50,6 @@ const routes = [{
       name: '我的',
       path: '/my',
       component: My
-    }, {
-      name: '外卖',
-      path: '/waimai',
-      component: WaiMai
     }, {
       name: '发现',
       path: '/find',
