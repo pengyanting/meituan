@@ -57,7 +57,6 @@
         },
         methods: {
             handleLogin() {
-                console.log(this.errors)
                 if (this.$vuerify.check(['phone','checkCode'])) {
                      localStorage.setItem('phone',this.phone);
                      this.$router.push({ path: '/'});

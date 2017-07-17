@@ -136,7 +136,6 @@
                     },
                     onMarkersSet: function (pois) {
                         vm.posList = pois;
-                        console.log(vm.posList)
                     },
                     onInfoHtmlSet: function (poi) {
 

@@ -42,7 +42,7 @@ export default {
                 var x = position.point.lng;
                 var y = position.point.lat;
                 axios.get('http://cangdu.org:8001/v2/pois/'+y+','+x).then(res => {
-                    console.log(res.data);
+                    
                 })
                 if (result.title) {
                     var ggPoint = new BMap.Point(result.lng, result.lat);

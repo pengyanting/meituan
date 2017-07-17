@@ -8,19 +8,19 @@
         </mt-header>
         <Search></Search>
         <div class='searchList clearfix'>
-            <div v-for="item in searchList">{{item.name}}</div>
+            <div v-for="item in searchList" :key='item'>{{item.name}}</div>
         </div>
         <div class="foodTypeBox">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide foodType">
-                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index<8'>
+                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index<8' :key='item'>
                             <img :src="$root._data.url+item.image_url" alt="">
                             <span>{{item.title}}</span>
                         </div>
                     </div>
                     <div class="swiper-slide foodType">
-                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index>7'>
+                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index>7' :key='item'>
                             <img :src="$root._data.url+item.image_url" alt="">
                             <span>{{item.title}}</span>
                         </div>
@@ -227,7 +227,6 @@ export default {
         })
         this.getCategoryList();
         this.getRecommendList();
-        console.log(this.active)
     },
     methods: {
         getCategoryList() {

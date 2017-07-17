@@ -28,6 +28,10 @@
 </script>
 <style lang="sass">
     .star {
+        ul{
+            display:flex;
+            align-items:center;
+        }
         ul,li {
             padding: 0;
             margin: 0;
@@ -49,7 +53,6 @@
         .score{
             font-size: 12px;
             color: #feaa0c;
-            line-height: 20px;
             margin: 0 5px;
         }
     }

@@ -1,8 +1,10 @@
 @font-face {
-    font-family: 'iconfont';
-    /* project id 254142 */
-    src: url('http://at.alicdn.com/t/font_ckmeidlckhu84cxr.eot');
-    src: url('http://at.alicdn.com/t/font_ckmeidlckhu84cxr.eot?#iefix') format('embedded-opentype'), url('http://at.alicdn.com/t/font_ckmeidlckhu84cxr.woff') format('woff'), url('http://at.alicdn.com/t/font_ckmeidlckhu84cxr.ttf') format('truetype'), url('http://at.alicdn.com/t/font_ckmeidlckhu84cxr.svg#iconfont') format('svg');
+  font-family: 'iconfont';  /* project id 254142 */
+  src: url('http://at.alicdn.com/t/font_0rntf8g8l43u9pb9.eot');
+  src: url('http://at.alicdn.com/t/font_0rntf8g8l43u9pb9.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_0rntf8g8l43u9pb9.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_0rntf8g8l43u9pb9.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_0rntf8g8l43u9pb9.svg#iconfont') format('svg');
 }
 
 @mixin iconfont {
@@ -50,4 +52,12 @@
 .shop-car:before {
     @include iconfont;
     content: '\e624';
+}
+.shop-car:before {
+    @include iconfont;
+    content: '\e624';
+}
+.right_arrow:before {
+    @include iconfont;
+    content: '\e768';
 }

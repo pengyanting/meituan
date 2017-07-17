@@ -25,8 +25,8 @@ import ConfirmAddress from './pages/my/address/confirmAddress.vue'
 import SearchAddress from './pages/my/address/searchAddress.vue'
 import Collection from './pages/my/collection/collection.vue'
 // 外卖
-import ListDetail from './pages/waimai/listDetail'
-
+import ListDetail from './pages/waimai/listDetail.vue'
+import ShopDetail from './pages/waimai/shopDetail.vue'
 // 发现
 import Find from './pages/find/findMain.vue'
 
@@ -141,6 +141,10 @@ const routes = [{
   name: '我的收藏',
   path: '/my/collection/collection',
   component: Collection
+}, {
+  name: '商家详情',
+  path: '/waimai/shopDetail',
+  component: ShopDetail
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

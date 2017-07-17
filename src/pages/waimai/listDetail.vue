@@ -9,7 +9,7 @@
                 <mt-button slot="right" icon="more"></mt-button>
             </mt-header>
             <div class="page-cell">
-                <mt-cell icon="more" is-link>
+                <mt-cell icon="more" is-link :to='{path:"/waimai/shopDetail",query:{id:id}}'>
                     <div>
                         <div class='food_text'>
                             <section>
@@ -77,7 +77,7 @@
                     <Car :totalList='products'></Car>
                 </mt-tab-container-item>
                 <mt-tab-container-item id="2">
-                    <Comment :score='score' :id='id'></Comment>
+                    <Comment :rateScore='score' :id='id'></Comment>
                 </mt-tab-container-item>
             </mt-tab-container>
         </div>
@@ -92,7 +92,7 @@ import Comment from './comment.vue'
 export default {
     data() {
         return {
-            selected: '2',
+            selected: '1',
             moveY: '',
             startY: '',//触摸点的位置
             endY: '',
@@ -147,17 +147,16 @@ export default {
             }).then(res => {
                 vm.foodList = res.data
                 vm.isActive = vm.foodList[0].name;
-
-
-                // console.log(vm.foodList);
             })
         },
         getRateScore() {
             var vm = this;
             axios.get(vm.$root._data.apiUrl + 'ugc/v2/restaurants/' + vm.id + '/ratings/scores').then(res => {
-                console.log(res.data)
                 vm.score = res.data
                 vm.score.overall_score=vm.score.overall_score.toFixed(1)
+                vm.score.food_score=vm.score.food_score.toFixed(1)
+                vm.score.service_score=vm.score.service_score.toFixed(1)
+                vm.score.compare_rating=vm.score.compare_rating.toFixed(3)*100
             })
         },
         handleclick(obj) {
@@ -293,12 +292,7 @@ export default {
                     font-size: 12px;
                     color: #fff;
                 }
-                .fengniao {
-                    padding: 3px 5px;
-                    background: #3792ed;
-                    border-radius: 3px;
-                    margin-left: 0;
-                }
+               
                 .distance li:nth-child(3) {
                     color: #1e91fb;
                 }

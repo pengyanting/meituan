@@ -12,7 +12,7 @@ body {
 }
 
 body {
-    padding-bottom: 56px;
+    // padding-bottom: 56px;
 }
 
 ul,
@@ -70,4 +70,41 @@ p {
     border: none!important;
     background: #4cc05f!important;
     color: #fff!important;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fengniao {
+    padding: 2px 5px;
+    background: #3792ed;
+    border-radius: 3px;
+    margin-left: 0;
+    color:#fff;
+    font-size:12px;
+}
+.zhunshi{
+    padding: 2px 0px;
+    border:1px solid #3792ed;
+    background:#fff;
+    border-radius: 3px;
+    margin-left: 0;
+    color:#3792ed;
+    font-size:12px;
+    width:58px;
+    text-align: center;
+    display:inline-block;
+}
+.supports{
+     padding: 2px 5px;
+    border:1px solid #ccc;
+    background:#fff;
+    border-radius: 3px;
+    margin-left: 0;
+    color:#ccc;
+    font-size:12px;
+    text-align: center;
 }

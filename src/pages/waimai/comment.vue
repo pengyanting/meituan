@@ -2,22 +2,22 @@
     <div>
         <section class='score'>
             <div class='overall'>
-                <li>4.7</li>
+                <li>{{rateScore.overall_score}}</li>
                 <li>综合评分</li>
-                <li>高于周围商家9.3%</li>
+                <li>高于周围商家{{rateScore.compare_rating}}%</li>
             </div>
             <ul class='other'>
                 <li class='service'>
                     <span>服务态度</span>
-                    <StartLevel :score='score.overall_score'></StartLevel>
+                    <StartLevel :score='rateScore.service_score'></StartLevel>
                 </li>
                 <li class='shop'>
                     <span>商品评分</span>
-                    <StartLevel :score='score.overall_score'></StartLevel>
+                    <StartLevel :score='rateScore.food_score'></StartLevel>
                 </li>
                 <li class='time'>
                     <span>送达时间</span>
-                    <span>20分钟</span>
+                    <span>{{rateScore.deliver_time}}分钟</span>
                 </li>
             </ul>
         </section>
@@ -45,12 +45,12 @@
                                         <span>满意</span>
                                     </p>
                                 </div>
-                                <div class='business'>商家回复：阿卡电脑卡死你看看见爱上你看啥看ask家电脑不卡机是拿不到阿克江睡不好觉三星</div>
-                                <div class='category'>
-                                    <span>娃娃菜：</span>
-                                    <span>味道更好</span>
+                                <!--<div class='business'>商家回复：阿卡电脑卡死你看看见爱上你看啥看ask家电脑不卡机是拿不到阿克江睡不好觉三星</div>-->
+                                <div class='category' v-for='n in item.item_ratings' :key='n'>
+                                    <span>{{n.food_name}}:</span>
+                                    <img v-if='n.image_hash' :src="getImgPath(n.image_hash)" alt="">
                                 </div>
-                                <img src="../../assets/images/my-head.png" alt="">
+    
                             </div>
                         </li>
                     </ul>
@@ -75,13 +75,12 @@ export default {
             commentList: [],
             commentType: [],
             active: '全部',
-            list: [],
             allLoaded: false,
             bottomStatus: '',
             wrapperHeight: 0
         }
     },
-    props: ['score', 'id'],
+    props: ['rateScore', 'id'],
     created() {
         this.getCommentType();
         this.getCommentList();
@@ -92,16 +91,15 @@ export default {
     methods: {
         getCommentList(item) {
             var vm = this;
-            vm.active=item == undefined?'全部':item.name
+            vm.active = item == undefined ? '全部' : item.name
             axios.get(vm.$root._data.apiUrl + 'ugc/v2/restaurants/' + vm.id + '/ratings', {
                 params: {
                     offset: 0,
                     limit: 10,
                     tag_name: vm.active
                 }
-            }).then(res=>{
-                vm.commentList=res.data
-                console.log(res.data)
+            }).then(res => {
+                vm.commentList = res.data
             })
         },
         getCommentType() {
@@ -116,19 +114,35 @@ export default {
 
         loadBottom() {
             setTimeout(() => {
-                let lastValue = this.list[this.list.length - 1];
-                if (lastValue < 40) {
+                let lastValue = this.commentList[this.commentList.length - 1];
+                if (lastValue < 5) {
                     for (let i = 1; i <= 10; i++) {
-                        this.list.push(lastValue + i);
+                        this.commentList.push(lastValue + i);
                     }
                 } else {
                     this.allLoaded = true;
                 }
-                this.$refs.loadmore.onBottomLoaded();
+                // this.$refs.loadmore.onBottomLoaded();
             }, 1500);
         },
-        getImgPath(path){
-            
+        getImgPath(path) {
+            if (path == "") {
+                return path ='img/my-head.b78a3b5.png';
+            }
+            let suffix;
+            if (path.indexOf('jpeg') !== -1) {
+                suffix = '.jpeg';
+            } else {
+                suffix = '.png'
+            }
+            let url = '/' + path.substr(0, 1) + '/' + path.substr(1, 2) + '/' + path.substr(3) + suffix;
+            return 'https://fuss10.elemecdn.com' + url;
+        },
+        formdateScore(score){
+           return score.toFixed(1)
+        },
+        fortmdatePersent(score){
+           
         }
     },
     watch: {
@@ -227,6 +241,7 @@ export default {
                 img{
                     width:50px;
                     height:50px;
+                    border:none;
                 }
                 &>div{
                     margin-bottom:5px;
@@ -276,11 +291,11 @@ export default {
                     border-bottom: 8px solid #f2f2f2;
                 }
                 .category{
-                    span:first-child{
+                    display:flex;
+                    align-items:flex-start;
+                    span{
                         color:#0882c1;
-                    }
-                     span:last-child{
-                        color:#323232;
+                        margin-right:10px;
                     }
                 }
             }
