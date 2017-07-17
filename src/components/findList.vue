@@ -4,7 +4,7 @@
             <h4>{{title}}</h4>
             <p class='titleDesc'>{{desc}}</p>
             <div class="findList">
-                <div class="findListItem" v-for="item in list">
+                <div class="findListItem" v-for="item in list" :key='item'>
                     <img src="../assets/images/find-img1.png" alt="">
                     <p class="itemName">{{item.title}}</p>
                     <p>￥{{item.price}}</p>

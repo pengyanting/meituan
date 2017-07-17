@@ -34,19 +34,19 @@
                     {
                         title: '积分商城',
                         desc: '0元好物在这里',
-                        imgUrl: './src/assets/images/find-item1.png'
+                        imgUrl: require('../../assets/images/find-item1.png')
                     }, {
                         title: '外卖热榜',
                         desc: '甄选特色好店',
-                        imgUrl: './src/assets/images/find-item2.png'
+                        imgUrl: '../../assets/images/find-item2.png'
                     }, {
                         title: '推荐有奖',
                         desc: '5元现金拿不停',
-                        imgUrl: './src/assets/images/find-item1.png'
+                        imgUrl: '../../assets/images/find-item1.png'
                     }, {
                         title: '后红包快抢',
                         desc: '礼包福利领不停',
-                        imgUrl: './src/assets/images/find-item2.png'
+                        imgUrl: '../../assets/images/find-item2.png'
                     }
                 ],
                 list: [
