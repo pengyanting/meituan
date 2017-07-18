@@ -16,7 +16,7 @@
             <p>交易明信展示近一个月资金交易数据；</p>
             <p>余额交易明细搭建中，可在[我的余额]中查看完整交易流水</p>
         </div>
-        <ImgTip text='暂无明细记录' isBtn imgUrl='./src/assets/images/order-nologin1.png'></ImgTip>
+        <ImgTip text='暂无明细记录' isBtn :imgUrl='imgUrl'></ImgTip>
     </div>
 </template>
 <script>
@@ -27,7 +27,8 @@ export default {
         return {
             startX: '',
             moveX: '',
-            isShowTip:true
+            isShowTip:true,
+            imgUrl:require('../../../assets/images/order-nologin1.png')
         }
     },
     methods: {
@@ -65,7 +66,7 @@ export default {
     }
     .nav {
         padding: 10px;
-        width: 510px;
+        width: 522px;
         button {
             background: #fff;
             border: 1px solid #dcdcdc;

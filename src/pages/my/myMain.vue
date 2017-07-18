@@ -3,6 +3,8 @@
         <div>
             <mt-header fixed>
                 <span slot="left">我的</span>
+                <router-link to='' slot='right' class='mui-icon mui-icon-chat'></router-link>
+                <router-link to='/my/setting' slot="right" class='mui-icon mui-icon-gear'></router-link>
             </mt-header>
             <div style="margin-top: 40px;" class='myLogin'>
                 <mt-cell to="/my/accountSafe" is-link>
@@ -37,99 +39,89 @@
     </div>
 </template>
 <script>
-    import FootBottom from '../../components/FootBottom.vue'
-    export default {
-        data() {
-            return {
-                phone: '',
-                myItems: [
-                    {
-                        title: '余额',
-                        icon: './src/assets/images/my-icon1.png',
-                        value: 123.5,
-                        desc: '元'
-                    }, {
-                        title: '优惠',
-                        icon: './src/assets/images/my-icon2.png',
-                        value: 0,
-                        desc: '个'
-                    }, {
-                        title: '积分',
-                        icon: './src/assets/images/my-icon3.png',
-                        value: 0,
-                        desc: '分'
-                    }
-                ],
-                myList: [
-                    {
-                        title: '收货地址',
-                        icon: './src/assets/images/my-left-icon1.png',
-                        links: '/my/address/addressList'
-                    }, {
-                        title: '我的收藏',
-                        icon: './src/assets/images/my-left-icon2.png',
-                        links: '/my/collection/collection'
-                    }, {
-                        title: '积分商城',
-                        icon: './src/assets/images/my-left-icon3.png'
-                    }, {
-                        title: '饿了么会员卡',
-                        icon: './src/assets/images/my-left-icon4.png'
-                    }, {
-                        title: '服务中心',
-                        icon: './src/assets/images/my-left-icon5.png'
-                    }, {
-                        title: '欢迎评分',
-                        icon: './src/assets/images/my-left-icon6.png'
-                    }
-                ]
-            }
-        },
-        methods: {
-            clickItems(item) {
-                switch (item.title) {
-                    case '余额':
-                        this.$router.push({ 'path': '/my/wallet/myWallet' });
-                        break;
-                    case '优惠':
-                        this.$router.push({'path':'/my/preferential'})
-                        break;
-                    case '积分':
-                        break;
-                    default:
-                        break;
+import FootBottom from '../../components/FootBottom.vue'
+export default {
+    data() {
+        return {
+            phone: '',
+            myItems: [
+                {
+                    title: '余额',
+                    icon: require('../../assets/images/my-icon1.png'),
+                    value: 123.5,
+                    desc: '元'
+                }, {
+                    title: '优惠',
+                    icon: require('../../assets/images/my-icon2.png'),
+                    value: 0,
+                    desc: '个'
+                }, {
+                    title: '积分',
+                    icon: require('../../assets/images/my-icon3.png'),
+                    value: 0,
+                    desc: '分'
                 }
-            }
-        },
-        mounted() {
-            this.$store.dispatch('LOGIN_TYPE', localStorage.getItem('phone'));
-            this.phone = localStorage.getItem('phone');
-        },
-        components: {
-            FootBottom
+            ],
+            myList: [
+                {
+                    title: '收货地址',
+                    icon: require('../../assets/images/my-left-icon1.png'),
+                    links: '/my/address/addressList'
+                }, {
+                    title: '我的收藏',
+                    icon: require('../../assets/images/my-left-icon2.png'),
+                    links: '/my/collection/collection'
+                }, {
+                    title: '积分商城',
+                    icon: require('../../assets/images/my-left-icon3.png')
+                }, {
+                    title: '饿了么会员卡',
+                    icon: require('../../assets/images/my-left-icon4.png')
+                }, {
+                    title: '服务中心',
+                    icon: require('../../assets/images/my-left-icon5.png')
+                }, {
+                    title: '欢迎评分',
+                    icon: require('../../assets/images/my-left-icon6.png')
+                }
+            ]
         }
+    },
+    methods: {
+        clickItems(item) {
+            switch (item.title) {
+                case '余额':
+                    this.$router.push({ 'path': '/my/wallet/myWallet' });
+                    break;
+                case '优惠':
+                    this.$router.push({ 'path': '/my/preferential' })
+                    break;
+                case '积分':
+                    break;
+                default:
+                    break;
+            }
+        }
+    },
+    mounted() {
+        this.$store.dispatch('LOGIN_TYPE', localStorage.getItem('phone'));
+        this.phone = localStorage.getItem('phone');
+    },
+    components: {
+        FootBottom
     }
+}
 
 </script>
+<style lang='sass' scoped>
+ .mui-icon-chat{
+    font-size:18px;
+    margin-right:10px;
+}
+</style>
+
 <style lang="sass">
     @import "../../assets/scss/common.scss";
-    /* 可以设置不同的进入和离开动画 */
-    /* 设置持续时间和动画函数 */
-    
-    .slide-fade-enter-active {
-        transition: all .3s ease;
-    }
-    
-    .slide-fade-leave-active {
-        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-    
-    .slide-fade-enter,
-    .slide-fade-leave-active {
-        transform: translateX(10px);
-        opacity: 0;
-    }
-    
     .myLogin {
         .mint-cell:last-child {
             background-image: none!important;
@@ -188,6 +180,7 @@
             p {
                 text-align: center;
                 margin-bottom: 5px;
+                font-size:14px;
             }
         }
         div:last-child {

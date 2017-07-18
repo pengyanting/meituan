@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='footBottom'>
         <mt-tabbar class='footBox' v-model='selected'>
             <mt-tab-item id="外卖">
                 <i class="icon-wai"></i> <span>外卖</span>

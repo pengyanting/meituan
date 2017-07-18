@@ -16,17 +16,18 @@
        </section>
        <section class='balanceDetail'>
            <h5>余额明细</h5>
-           <ImgTip text='暂无明细记录' isBtn imgUrl='./src/assets/images/order-nologin1.png'></ImgTip>
+           <ImgTip text='暂无明细记录' isBtn :imgUrl='imgUrl'></ImgTip>
        </section>
     </div>
 </template>
 <script>
 import HeadTop from '../../../components/HeadTop.vue'
 import ImgTip from '../../order/noLogin.vue'
+
     export default {
         data() {
             return {
-
+                imgUrl:require("../../../assets/images/order-nologin1.png")
             }
         },
         methods: {

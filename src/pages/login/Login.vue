@@ -99,4 +99,9 @@
     .error {
         color: red;
     }
+    .page-part input{
+        padding:0!important;
+        margin:0!important;
+        border:none !important;
+    }
 </style>

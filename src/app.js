@@ -19,8 +19,12 @@ Vue.use(VuerifyDirective)
 import store from './store/index'
 
 // 引入rem
-import './libs/rem.js'
+import './libs/js/rem.js'
 
+
+// 引入mui
+import mui from './libs/js/mui.min.js'
+import './libs/css/mui.min.css'
 
 // mock模拟数据
 const Mock = require('mockjs')

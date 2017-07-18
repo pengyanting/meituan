@@ -8,30 +8,28 @@
                 <mt-button slot="right" icon="more"></mt-button>
                 <mt-button slot="right" icon="more"></mt-button>
             </mt-header>
-            <div class="page-cell">
-                <mt-cell icon="more" is-link :to='{path:"/waimai/shopDetail",query:{id:id}}'>
-                    <div>
-                        <div class='food_text'>
-                            <section>
-                                <h3 class='food_title'>
-                                    <img v-if='detail.is_premium' src="../../assets/images/pinpai.png" alt="">
-                                    <span>{{detail.name}}</span>
-                                </h3>
-                                <div class='peisongs'>
-                                    <span v-if='detail.delivery_mode' class='fengniao'>{{detail.delivery_mode.text}}</span>
-                                    <ul class='peisongfei'>
-                                        <li>￥4{{foodList.float_minimum_order_amount}}元起送</li>
-                                        <span>|</span>
-                                        <li v-if='detail.piecewise_agent_fee'>{{detail.piecewise_agent_fee.tips}}</li>
-                                    </ul>
-                                </div>
-                                <p class='gonggao'>{{detail.promotion_info}}</p>
-                            </section>
-                        </div>
+            <router-link :to='{path:"/waimai/shopDetail",query:{id:id}}'>
+                <div class="page-cell">
+                    <img :src="$root._data.imgUrl+detail.image_path" width="100" height="100">
+                    <div class='food_text'>
+                        <section>
+                            <h3 class='food_title'>
+                                <img v-if='detail.is_premium' src="../../assets/images/pinpai.png" alt="">
+                                <span>{{detail.name}}</span>
+                            </h3>
+                            <div class='peisongs'>
+                                <span v-if='detail.delivery_mode' class='fengniao'>{{detail.delivery_mode.text}}</span>
+                                <ul class='peisongfei'>
+                                    <li>￥4{{foodList.float_minimum_order_amount}}元起送</li>
+                                    <span>|</span>
+                                    <li v-if='detail.piecewise_agent_fee'>{{detail.piecewise_agent_fee.tips}}</li>
+                                </ul>
+                            </div>
+                            <p class='gonggao'>{{detail.promotion_info}}</p>
+                        </section>
                     </div>
-                    <img slot="icon" :src="$root._data.imgUrl+detail.image_path" width="100" height="100">
-                </mt-cell>
-            </div>
+                </div>
+            </router-link>
         </div>
         <div class="page-navbar" ref='menu' @touchmove='move' @touchstart='start' @touchend='end'>
             <mt-navbar class="page-part" v-model="selected">
@@ -54,22 +52,20 @@
                                     <span>{{n.name}}</span>{{n.description}}
                                 </div>
                                 <div class='goodsList-item' v-for='item in n.foods' :key='item'>
-                                    <mt-cell title="" icon="more">
-                                        <ul>
-                                            <li class='foodName'>{{item.name}}</li>
-                                            <li class='foodSell'>
-                                                <span>月售{{item.month_sales}}份</span>
-                                                <span>好评{{item.rating_count}}</span>
-                                            </li>
-                                            <li class='foodPrice'>￥{{item.specfoods[0].price}}</li>
-                                        </ul>
-                                        <div class='quantity'>
-                                            <img v-if='quantity.id==item.item_id' src="../../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item,index)'>
-                                            <span v-if='quantity.id==item.item_id'>{{quantity.quantity}}</span>
-                                            <img src="../../assets/images/add.png" width="20" height="20" @click='addFood(item,index)'>
-                                        </div>
-                                        <img slot="icon" :src="$root._data.imgUrl+item.image_path" width="62" height="57">
-                                    </mt-cell>
+                                    <img slot="icon" :src="$root._data.imgUrl+item.image_path" width="62" height="57">
+                                    <ul>
+                                        <li class='foodName'>{{item.name}}</li>
+                                        <li class='foodSell'>
+                                            <span>月售{{item.month_sales}}份</span>
+                                            <span>好评{{item.rating_count}}</span>
+                                        </li>
+                                        <li class='foodPrice'>￥{{item.specfoods[0].price}}</li>
+                                    </ul>
+                                    <div class='quantity'>
+                                        <img v-if='quantity.id==item.item_id' src="../../assets/images/reduce.png" width="20" height="20" @click='reduceFood(item,index)'>
+                                        <span v-if='quantity.id==item.item_id'>{{quantity.quantity}}</span>
+                                        <img src="../../assets/images/add.png" width="20" height="20" @click='addFood(item,index)'>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -153,10 +149,10 @@ export default {
             var vm = this;
             axios.get(vm.$root._data.apiUrl + 'ugc/v2/restaurants/' + vm.id + '/ratings/scores').then(res => {
                 vm.score = res.data
-                vm.score.overall_score=vm.score.overall_score.toFixed(1)
-                vm.score.food_score=vm.score.food_score.toFixed(1)
-                vm.score.service_score=vm.score.service_score.toFixed(1)
-                vm.score.compare_rating=vm.score.compare_rating.toFixed(3)*100
+                vm.score.overall_score = vm.score.overall_score.toFixed(1)
+                vm.score.food_score = vm.score.food_score.toFixed(1)
+                vm.score.service_score = vm.score.service_score.toFixed(1)
+                vm.score.compare_rating = vm.score.compare_rating.toFixed(3) * 100
             })
         },
         handleclick(obj) {
@@ -212,10 +208,6 @@ export default {
 }
 
 </script>
-<style lang='sass' scoped>
-  
-</style>
-
 <style lang='sass'>
     .hd_box {
         background: url(../../assets/images/bg.png) no-repeat center;
@@ -247,8 +239,15 @@ export default {
         .mint-cell-title {
             flex: 0;
         }
+        .page-cell{
+            display:flex;
+            align-items:center;
+            position:relative;
+            z-index:88;
+            justify-content:space-between;
+            padding:0 10px 10px;
+        }
         .food_text {
-            margin-top: 5px;
             margin-left: 10px;
             flex-shrink: 0;
             flex-grow: 1;
@@ -375,7 +374,10 @@ export default {
             }
         }
         .goodsList-item {
-            padding-left: 10px;
+            padding:0 15px;
+            display:flex;
+            align-items:center;
+            justify-content:space-around;
             ul {
                 padding: 0;
                 margin: 0;
@@ -385,6 +387,9 @@ export default {
             }
             .quantity{
                padding-top:35px;
+               width:65px;
+               display:flex;
+               justify-content:flex-end;
                span{
                    margin: 0 3px;
                }

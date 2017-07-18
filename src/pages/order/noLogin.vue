@@ -3,10 +3,7 @@
         <div class="nlBox">
             <img :src="imgUrl" alt="">
             <p>{{text}}</p>
-
             <mt-button type="default" class="btn">立即登录</mt-button>
-
-
         </div>
     </div>
 </template>

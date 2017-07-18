@@ -38,15 +38,15 @@
                     }, {
                         title: '外卖热榜',
                         desc: '甄选特色好店',
-                        imgUrl: '../../assets/images/find-item2.png'
+                        imgUrl: require('../../assets/images/find-item2.png')
                     }, {
                         title: '推荐有奖',
                         desc: '5元现金拿不停',
-                        imgUrl: '../../assets/images/find-item1.png'
+                        imgUrl: require('../../assets/images/find-item1.png')
                     }, {
                         title: '后红包快抢',
                         desc: '礼包福利领不停',
-                        imgUrl: '../../assets/images/find-item2.png'
+                        imgUrl: require('../../assets/images/find-item2.png')
                     }
                 ],
                 list: [

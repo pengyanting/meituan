@@ -105,8 +105,8 @@
 </template>
 <script>
 import Search from "../components/search.vue"
-import '../libs/swiper.min.js'
-import '../assets/swiper.min.css'
+import '../libs/js/swiper.min.js'
+import '../libs/css/swiper.min.css'
 import List from '../pages/waimai/list.vue'
 import BMap from 'BMap'
 import axios from "axios"

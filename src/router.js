@@ -24,6 +24,7 @@ import AddAdderss from './pages/my/address/addAddress.vue'
 import ConfirmAddress from './pages/my/address/confirmAddress.vue'
 import SearchAddress from './pages/my/address/searchAddress.vue'
 import Collection from './pages/my/collection/collection.vue'
+import Setting from './pages/my/setting/setting.vue'
 // 外卖
 import ListDetail from './pages/waimai/listDetail.vue'
 import ShopDetail from './pages/waimai/shopDetail.vue'
@@ -145,6 +146,10 @@ const routes = [{
   name: '商家详情',
   path: '/waimai/shopDetail',
   component: ShopDetail
+}, {
+  name: '设置',
+  path: '/my/setting',
+  component: Setting
 }]
 
 // 创建 router 实例，然后传 `routes` 配置

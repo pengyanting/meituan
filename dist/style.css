@@ -1443,7 +1443,7 @@ article p[data-v-558e84aa] {
 }
 .nav[data-v-29a0e62a] {
   padding: 10px;
-  width: 510px;
+  width: 522px;
 }
 .nav button[data-v-29a0e62a] {
     background: #fff;
@@ -2691,8 +2691,22 @@ a[data-v-2b629fe9] {
     -ms-flex: 0;
             flex: 0;
 }
+.hd_box .page-cell {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+    position: relative;
+    z-index: 88;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 0 10px 10px;
+}
 .hd_box .food_text {
-    margin-top: 5px;
     margin-left: 10px;
     -ms-flex-negative: 0;
             flex-shrink: 0;
@@ -2822,7 +2836,16 @@ a[data-v-2b629fe9] {
       margin-right: 5px;
 }
 .goodsList .goodsList-item {
-    padding-left: 10px;
+    padding: 0 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+            justify-content: space-around;
 }
 .goodsList .goodsList-item ul {
       padding: 0;
@@ -2833,6 +2856,14 @@ a[data-v-2b629fe9] {
 }
 .goodsList .goodsList-item .quantity {
       padding-top: 35px;
+      width: 65px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: end;
+      -ms-flex-pack: end;
+              justify-content: flex-end;
 }
 .goodsList .goodsList-item .quantity span {
         margin: 0 3px;

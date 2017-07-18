@@ -9,17 +9,17 @@
             <router-link to="/my/wallet/balance">
                 <mt-cell title="￥0.00" is-link>
                     <span>不可提现</span>
-                    <img slot="icon" src="src/assets/images/wallet.png" width="40" height="40">
+                    <img slot="icon" src="../../../assets/images/wallet.png" width="40" height="40">
                 </mt-cell>
             </router-link>
         </section>
         <div class='space'></div>
         <mt-cell title="交易明细" is-link to='/my/wallet/tradeList'>
-            <img slot="icon" src="src/assets/images/traderecord.png" width="20" height="20">
+            <img slot="icon" src="../../../assets/images/traderecord.png" width="20" height="20">
         </mt-cell>
         <div class='space'></div>
         <mt-cell title="支付设置" is-link>
-            <img slot="icon" src="src/assets/images/setting.png" width="20" height="20">
+            <img slot="icon" src="../../../assets/images/setting.png" width="20" height="20">
         </mt-cell>
     </div>
 </template>
