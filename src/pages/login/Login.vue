@@ -22,56 +22,72 @@
     </div>
 </template>
 <script>
-    import { Toast } from 'mint-ui';
-    export default {
-        data() {
-            return {
-                phone: '',
-                checkCode: ''
+import { Toast } from 'mint-ui';
+import { login } from '../../service/getData.js'
+export default {
+    data() {
+        return {
+            phone: '',
+            checkCode: ''
+        }
+    },
+    vuerify: {
+        phone: [
+            {
+                test: /\S+$/,
+                message: '请填写手机号'
+            }, {
+                test: /\w{11,}/,
+                message: '请输入正确的手机号码'
             }
-        },
-        vuerify: {
-            phone: [
-                {
-                    test: /\S+$/,
-                    message: '请填写手机号'
-                }, {
-                    test: /\w{11,}/,
-                    message: '请输入正确的手机号码'
-                }
-            ],
-            checkCode:[
-                 {
-                    test: /\S+$/,
-                    message: '请填写验证码'
-                }, {
-                    test: /\w{6,}/,
-                    message: '请输入有效验证码'
-                }
-            ]
-        },
-        computed: {
-            errors() {
-                return this.$vuerify.$errors
+        ],
+        checkCode: [
+            {
+                test: /\S+$/,
+                message: '请填写验证码'
+            }, {
+                test: /\w{6,}/,
+                message: '请输入有效验证码'
             }
-        },
-        methods: {
-            handleLogin() {
-                if (this.$vuerify.check(['phone','checkCode'])) {
-                     localStorage.setItem('phone',this.phone);
-                     this.$router.push({ path: '/'});
-                     this.$store.dispatch('LOGIN_TYPE',localStorage.getItem('phone'));
-                } else {
-                    let message=this.errors.phone?this.errors.phone:this.errors.checkCode;
-                    Toast({
-                        message: message[0]?message[0]:'',
-                        position: 'bottom',
-                        duration: 5000
-                    });
-                }
+        ]
+    },
+    computed: {
+        errors() {
+            return this.$vuerify.$errors
+        }
+    },
+    methods: {
+        handleLogin() {
+            var vm = this;
+            if (this.$vuerify.check(['phone', 'checkCode'])) {
+                login({
+                    phone: vm.phone,
+                    checkCode: vm.checkCode
+                }, res => {
+                    if (res.data.code == 0) {
+                        localStorage.setItem('phone', vm.phone);
+                        vm.$router.push({ path: '/' });
+                        vm.$store.dispatch('LOGIN_TYPE', localStorage.getItem('phone'));
+                    } else {
+                        Toast({
+                            message: res.data.message,
+                            position: 'bottom',
+                            duration: 5000
+                        });
+                    }
+                })
+
+            } else {
+                let message = this.errors.phone ? this.errors.phone : this.errors.checkCode;
+                Toast({
+                    message: message[0] ? message[0] : '',
+                    position: 'bottom',
+                    duration: 5000
+                });
             }
         }
     }
+}
 
 </script>
 <style lang="sass">

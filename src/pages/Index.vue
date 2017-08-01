@@ -112,6 +112,8 @@ import BMap from 'BMap'
 import axios from "axios"
 import FootBottom from '../components/FootBottom.vue'
 import HeadTop from '../components/HeadTop.vue'
+import myjs from '../libs/js/myjs.js'
+import qs from 'querystring'
 export default {
     data() {
         return {
@@ -213,7 +215,7 @@ export default {
         }
     },
     created() {
-
+       console.log(myjs.other.getEndTime('2017/8/1 16:0:0'))
     },
     mounted() {
         //初始化swiper

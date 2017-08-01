@@ -39,6 +39,9 @@ Vue.use(VueRouter)
 const routes = [{
   path: '/', // 顶级路由
   component: App,
+  meta: {
+    noAuto: true
+  },
   children: [
     {
       // 二级路由
@@ -68,7 +71,10 @@ const routes = [{
   }
 }, {
   path: '/PwLogin',
-  component: PwLogin
+  component: PwLogin,
+  meta: {
+    noAuto: true
+  }
 }, {
   name: '账户与安全',
   path: '/my/accountSafe',
