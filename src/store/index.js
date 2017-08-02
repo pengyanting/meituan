@@ -9,7 +9,8 @@ const state = {
   address: '',
   position: {},
   added: [],
-  all: []
+  all: [],
+  userInfo: {}
 }
 const getters = {
   cartProducts(state) {

@@ -25,6 +25,7 @@ import ConfirmAddress from './pages/my/address/confirmAddress.vue'
 import SearchAddress from './pages/my/address/searchAddress.vue'
 import Collection from './pages/my/collection/collection.vue'
 import Setting from './pages/my/setting/setting.vue'
+import UpdatePwd from './pages/my/safe/updatePwd.vue'
 // 外卖
 import ListDetail from './pages/waimai/listDetail.vue'
 import ShopDetail from './pages/waimai/shopDetail.vue'
@@ -91,6 +92,10 @@ const routes = [{
   name: '绑定手机',
   path: '/my/accountSafe/bindMobile',
   component: BindMobile
+}, {
+  name: '修改密码',
+  path: '/my/accountSafe/updatePwd',
+  component: UpdatePwd
 }, {
   name: '商家详情',
   path: '/waimai/listDetail',

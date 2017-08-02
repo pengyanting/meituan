@@ -5,33 +5,70 @@
         </mt-header>
         <div class='space' style="margin-top: 40px;"></div>
         <div class='filed'>
-            <input type="text" placeholder="用户名" autofocus>
+            <input type="text" placeholder="用户名" autofocus v-model='name'>
             <span>用户名只能修改一次（5-24个字）</span>
-            <div class='btnBox'>
-                <mt-button size="large">确认修改</mt-button>
+            <div :class='{"btnBox":true,"btnBox-g":check}'>
+                <mt-button size="large" @click='doConfirm'>确认修改</mt-button>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-
-            }
-        },
-        methods: {
-            handleBack() {
-                this.$router.push({ path: '/my/accountSafe' });
-            }
-        },
-        mounted() {
-
-        },
-        components: {
-
+import { updateName } from '../../service/getData'
+import { Toast, Indicator, MessageBox } from 'mint-ui'
+export default {
+    data() {
+        return {
+            name: ''
         }
+    },
+    vuerify: {
+        name: [{
+            test: /\S+$/,
+            message: ''
+        }, {
+            test: /\w{5,}/,
+            message: ''
+        }]
+    },
+    methods: {
+        handleBack() {
+            this.$router.push({ path: '/my/accountSafe' });
+        },
+        doConfirm() {
+            var vm=this;
+            if (!this.check) { return; }
+            MessageBox.confirm('用户名仅限修改一次').then(action => {
+                console.log(action)
+               if(action!="confirm"){return;}
+               vm.doUpdate()
+            });
+        },
+        doUpdate() {
+            var vm = this;
+            Indicator.open();
+            updateName({ id: vm.$route.query.id, name: vm.name }, res => {
+                if (res.data.code == 0) {
+                    setTimeout(() => {
+                        Indicator.close();
+                        this.$router.push({ 'path': '/my/accountSafe' })
+                    }, 2000);
+                }
+            })
+        }
+    },
+    mounted() {
+
+    },
+    computed: {
+        check() {
+            return this.$vuerify.check(['name'])
+        }
+    },
+    components: {
+
     }
+}
 
 </script>
 <style lang='sass'>
@@ -65,6 +102,11 @@
                 background:#ccc;
                 border:none;
                 color:#fff;
+            }
+        }
+        .btnBox-g{
+            button{
+                background:#4cc05f;
             }
         }
     }

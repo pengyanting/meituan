@@ -1,6 +1,6 @@
 var myjs = {
     //字符串操作
-    string: {
+    str: {
         /**
          * 去除字符串的空格
          * str 需要格式化的字符串
@@ -79,7 +79,7 @@ var myjs = {
             if (regArr.length === 3 && type === 0) {
                 regtext = '(\\w{' + regArr[0] + '})\\w{' + regArr[1] + '}(\\w{' + regArr[2] + '})'
                 Reg = new RegExp(regtext);
-                var replaceCount = repeatStr(replaceText, regArr[1]);
+                var replaceCount = myjs.str.repeatStr(replaceText, regArr[1]);
                 return str.replace(Reg, '$1' + replaceCount + '$2')
             }
             //replaceStr('asdasdasdaa',[3,5,3],1)
@@ -87,8 +87,8 @@ var myjs = {
             else if (regArr.length === 3 && type === 1) {
                 regtext = '\\w{' + regArr[0] + '}(\\w{' + regArr[1] + '})\\w{' + regArr[2] + '}'
                 Reg = new RegExp(regtext);
-                var replaceCount1 = repeatSte(replaceText, regArr[0]);
-                var replaceCount2 = repeatSte(replaceText, regArr[2]);
+                var replaceCount1 = myjs.str.repeatStr(replaceText, regArr[0]);
+                var replaceCount2 = myjs.str.repeatStr(replaceText, regArr[2]);
                 return str.replace(Reg, replaceCount1 + '$1' + replaceCount2)
             }
             //replaceStr('1asd88465asdwqe3',[5],0)
@@ -96,7 +96,7 @@ var myjs = {
             else if (regArr.length === 1 && type == 0) {
                 regtext = '(^\\w{' + regArr[0] + '})'
                 Reg = new RegExp(regtext);
-                var replaceCount = repeatSte(replaceText, regArr[0]);
+                var replaceCount = myjs.str.repeatStr(replaceText, regArr[0]);
                 return str.replace(Reg, replaceCount)
             }
             //replaceStr('1asd88465asdwqe3',[5],1,'+')
@@ -104,7 +104,7 @@ var myjs = {
             else if (regArr.length === 1 && type == 1) {
                 regtext = '(\\w{' + regArr[0] + '}$)'
                 Reg = new RegExp(regtext);
-                var replaceCount = repeatSte(replaceText, regArr[0]);
+                var replaceCount = myjs.str.repeatStr(replaceText, regArr[0]);
                 return str.replace(Reg, replaceCount)
             }
         },
@@ -180,7 +180,7 @@ var myjs = {
             return str.split(strSplit).length - 1
         }
     },
-    array: {
+    arr: {
         /**
          * 数组去重
          * 使用es6的from方法：把类似数组的对象转换为数组
@@ -449,10 +449,6 @@ var myjs = {
         }
     }
 }
-
-var str = 'abcde';
-var newStr = myjs.string.replaceAll(str, 'ab', '123')
-
 
 export default myjs
 // https://segmentfault.com/a/1190000010225928#articleHeader39

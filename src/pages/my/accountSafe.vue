@@ -10,19 +10,25 @@
                     <img :src="imgUrl" width="40" height="40">
                 </mt-cell>
             </div>
-            <router-link to="/my/accountSafe/updateUserName">
+            <router-link :to="{path:'/my/accountSafe/updateUserName',query:{id:userInfo.id}}">
                 <mt-cell title='用户名'>
-                    <span>哈哈哈</span>
+                    <span>{{userInfo.name}}</span>
                 </mt-cell>
             </router-link>
         </section>
         <div class='space'></div>
         <section>
             <mt-cell title='账号绑定'></mt-cell>
-            <mt-cell title='手机' :to="{ name: '绑定手机' }">
+            <mt-cell title='手机' to="/my/accountSafe/bindMobile" v-if='!userInfo.phone'>
                 <img slot="icon" src="../../assets/images/phone.png" width="24" height="24">
                 <span class='weibangding'>未绑定</span>
             </mt-cell>
+            <div v-else>
+                <mt-cell title='手机'>
+                    <img slot="icon" src="../../assets/images/phone.png" width="24" height="24">
+                    <span>{{formdataPhone(userInfo.phone)}}</span>
+                </mt-cell>
+            </div>
             <mt-cell title='微信'>
                 <img slot="icon" src="../../assets/images/weixin.png" width="24" height="24">
                 <span class='weibangding'>未绑定</span>
@@ -43,7 +49,7 @@
         <div class='space'></div>
         <section>
             <mt-cell title='安全设置'></mt-cell>
-            <mt-cell title='登录密码'>
+            <mt-cell title='登录密码' to='/my/accountSafe/updatePwd'>
                 <span class='weibangding'>修改</span>
             </mt-cell>
             <mt-cell title='支付密码'>
@@ -67,16 +73,36 @@
     </div>
 </template>
 <script>
+import { getUser } from '../../service/getData.js'
+import myjs from '../../libs/js/myjs.js'
 export default {
     data() {
         return {
             username: '',
+            userInfo: {},
             head: false,
-            imgUrl:require('../../assets/images/my-head.png')
+            imgUrl: require('../../assets/images/my-head.png')
         }
     },
     mounted() {
 
+    },
+    created() {
+        var vm = this;
+        getUser({
+            phone: localStorage.getItem('phone')
+        }, res => {
+            if (res.data.code == 0) {
+                vm.userInfo = res.data.result
+            }
+        })
+    },
+    beforeRouteLeave(to, from, next) {
+        //用户名只能修改一次逻辑
+        if (to.path == '/my/accountSafe/updateUserName') {
+            if (this.userInfo.isUpdateName == 1) { return; }
+        }
+        next();
     },
     methods: {
         handleBack() {
@@ -97,9 +123,9 @@ export default {
             var cmr = plus.camera.getCamera();
             var res = cmr.supportedImageResolutions[0];
             var fmt = cmr.supportedImageFormats[0];
-            var vm=this;
+            var vm = this;
             cmr.captureImage(function (path) {
-                vm.imgUrl=path;
+                vm.imgUrl = path;
                 // alert("Capture image success: " + path);
             },
                 function (error) {
@@ -107,6 +133,10 @@ export default {
                 },
                 { resolution: res, format: fmt }
             );
+        },
+        formdataPhone(phone) {
+
+            return phone ? myjs.str.replaceStr(phone, [3, 5, 3], 0) : ''
         }
     }
 }

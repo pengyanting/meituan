@@ -3,14 +3,13 @@
         <div>
             <mt-header fixed>
                 <span slot="left">我的</span>
-                <router-link to='' slot='right' class='mui-icon mui-icon-chat'></router-link>
-                <router-link to='/my/setting' slot="right" class='mui-icon mui-icon-gear'></router-link>
+                <router-link to='/my/setting' slot='right'>设置</router-link>
             </mt-header>
             <div style="margin-top: 40px;" class='myLogin'>
                 <mt-cell to="/my/accountSafe" is-link>
                     <div style="margin-left: 10px;" v-if='$store.state.loginType'>
-                        <h4 class="title">哈哈哈哈</h4>
-                        <span class="desc">{{phone}}</span>
+                        <h4 class="title">{{userInfo.name}}</h4>
+                        <span class="desc">{{formdataPhone(userInfo.phone)}}</span>
                     </div>
                     <div style="margin-left: 10px;" v-else>
                         <h4 class="title">立即登录</h4>
@@ -40,10 +39,13 @@
 </template>
 <script>
 import FootBottom from '../../components/FootBottom.vue'
+import { getUser } from '../../service/getData.js'
+import myjs from '../../libs/js/myjs.js'
 export default {
     data() {
         return {
             phone: '',
+            userInfo: {},
             myItems: [
                 {
                     title: '余额',
@@ -101,11 +103,24 @@ export default {
                 default:
                     break;
             }
+        },
+        formdataPhone() {
+            return myjs.str.replaceStr(localStorage.getItem('phone'), [3, 5, 3], 0)
         }
     },
     mounted() {
         this.$store.dispatch('LOGIN_TYPE', localStorage.getItem('phone'));
         this.phone = localStorage.getItem('phone');
+    },
+    created() {
+        var vm = this;
+        getUser({
+            phone: localStorage.getItem('phone')
+        }, res => {
+            if (res.data.code == 0) {
+                vm.userInfo = res.data.result
+            }
+        })
     },
     components: {
         FootBottom
