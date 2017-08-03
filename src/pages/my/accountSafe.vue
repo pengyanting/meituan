@@ -49,7 +49,7 @@
         <div class='space'></div>
         <section>
             <mt-cell title='安全设置'></mt-cell>
-            <mt-cell title='登录密码' to='/my/accountSafe/updatePwd'>
+            <mt-cell title='登录密码' :to='{path:"/my/accountSafe/updatePwd",query:{id:userInfo.id}}'>
                 <span class='weibangding'>修改</span>
             </mt-cell>
             <mt-cell title='支付密码'>
@@ -107,7 +107,7 @@ export default {
     methods: {
         handleBack() {
             this.$store.dispatch("SELECT_TYPE", '我的');
-            this.$router.push({ path: '/' });
+            this.$router.push({ path: '/my' });
         },
         updateHead(e) {
             this.head = true;

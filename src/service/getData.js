@@ -11,3 +11,7 @@ export const getUser = (data, fun) => {
 export const updateName = (data, fun) => {
   ax('users/updateName', 'post', data).then(res => { fun(res) }).catch(err => console.log(err))
 }
+
+export const updatePwd = (data, fun) => {
+  ax('users/updatePwd', 'post', data).then(res => { fun(res) }).catch(err => console.log(err))
+}
