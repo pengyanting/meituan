@@ -56,125 +56,129 @@
             <cityList :currentPos='cityName' @selectCity='selectCity'></cityList>
         </section>
         <section class='searchList'>
-
         </section>
     </div>
 </template>
 <script>
-    import cityList from '../../../components/cityList.vue'
-    export default {
-        data() {
-            return {
-                value: '',
-                defaultResult: [
-                    'Apple',
-                    'Banana',
-                    'Orange',
-                    'Durian',
-                    'Lemon',
-                    'Peach',
-                    'Cherry',
-                    'Berry',
-                    'Core',
-                    'Fig',
-                    'Haw',
-                    'Melon',
-                    'Plum',
-                    'Pear',
-                    'Peanut',
-                    'Other'
-                ],
-                selected: '1',
-                startX: '',
-                moveX: '',
-                posList: [],
-                myKeys: ["写字楼", "加油站", '园区', '学校', '大厦', '商业街', '小区'],//初始搜索类型
-                map: '',
-                cityName: '',
-                cityList: '',
-                show: 'cityList'
-            }
-        },
-        computed: {
-            filterResult() {
-                return this.defaultResult.filter(value => new RegExp(this.value, 'i').test(value));
-            }
-        },
-        methods: {
-            searchPos() {
-                var vm = this;
-                vm.map = new BMap.Map("mymap");
-                var position = vm.$store.state.position;
-                vm.map.centerAndZoom(new BMap.Point(position.x, position.y), 11);
-                vm.queryCity();
-            },
-            getCity() {
-                // 百度地图API功能
-                var vm = this;
-                var myCity = new BMap.LocalCity();
-                myCity.get(function (result) {
-                    vm.cityName = result.name
-                });
-            },
-            handleCityList() {
-                this.show = this.show == 'cityList' ? 'pos' : 'cityList'
-            },
-            selectCity(val) {
-                //通过城市名称定位
-                var vm = this;
-                vm.map.centerAndZoom(val.name, 11);      // 用城市名设置地图中心点
-                vm.queryCity();
-                this.show = 'pos'
-            },
-            queryCity() {
-                var vm = this;
-                var local = new BMap.LocalSearch(vm.map, {
-                    renderOptions: { map: vm.map, panel: "r-result" },
-                    pageCapacity: 20,
-                    onSearchComplete: function (res) {
-
-                    },
-                    onMarkersSet: function (pois) {
-                        vm.posList = pois;
-                    },
-                    onInfoHtmlSet: function (poi) {
-
-                    }
-                });
-                local.searchInBounds(vm.myKeys, vm.map.getBounds());
-            }
-        },
-        mounted() {
-            // 初始化位置
-            this.searchPos();
-            this.getCity();
-        },
-        watch: {
-            selected(val, oldVal) {
-                switch (val) {
-                    case '1':
-                        this.myKeys = ["写字楼", "加油站", '园区', '学校', '大厦', '商业街', '小区'];
-                        break;
-                    case '2':
-                        this.myKeys = ["写字楼"];
-                        break;
-                    case '3':
-                        this.myKeys = ["小区"];
-                        break;
-                    case '4':
-                        this.myKeys = ["学校"];
-                        break;
-                    default:
-                        break;
-                }
-                this.queryCity();
-            }
-        },
-        components: {
-            cityList
-        }
+import cityList from "../../../components/cityList.vue";
+export default {
+  data() {
+    return {
+      value: "",
+      defaultResult: [
+        "Apple",
+        "Banana",
+        "Orange",
+        "Durian",
+        "Lemon",
+        "Peach",
+        "Cherry",
+        "Berry",
+        "Core",
+        "Fig",
+        "Haw",
+        "Melon",
+        "Plum",
+        "Pear",
+        "Peanut",
+        "Other"
+      ],
+      selected: "1",
+      startX: "",
+      moveX: "",
+      posList: [],
+      myKeys: ["写字楼", "加油站", "园区", "学校", "大厦", "商业街", "小区"], //初始搜索类型
+      map: "",
+      cityName: "",
+      cityList: "",
+      show: "cityList"
+    };
+  },
+  computed: {
+    filterResult() {
+      return this.defaultResult.filter(value =>
+        new RegExp(this.value, "i").test(value)
+      );
     }
-
+  },
+  methods: {
+    searchPos() {
+      var vm = this;
+      vm.map = new BMap.Map("mymap");
+      var position = vm.$store.state.position;
+      vm.map.centerAndZoom(new BMap.Point(position.x, position.y), 11);
+      vm.queryCity();
+    },
+    getCity() {
+      // 百度地图API功能
+      var vm = this;
+      var myCity = new BMap.LocalCity();
+      myCity.get(function(result) {
+        vm.cityName = result.name;
+      });
+    },
+    handleCityList() {
+      this.show = this.show == "cityList" ? "pos" : "cityList";
+    },
+    selectCity(val) {
+      //通过城市名称定位
+      var vm = this;
+      vm.map.centerAndZoom(val.name, 11); // 用城市名设置地图中心点
+      vm.queryCity();
+      this.show = "pos";
+    },
+    queryCity() {
+      var vm = this;
+      var local = new BMap.LocalSearch(vm.map, {
+        renderOptions: { map: vm.map, panel: "r-result" },
+        pageCapacity: 20,
+        onSearchComplete: function(res) {},
+        onMarkersSet: function(pois) {
+          vm.posList = pois;
+        },
+        onInfoHtmlSet: function(poi) {}
+      });
+      local.searchInBounds(vm.myKeys, vm.map.getBounds());
+    }
+  },
+  mounted() {
+    // 初始化位置
+    this.searchPos();
+    this.getCity();
+  },
+  watch: {
+    selected(val, oldVal) {
+      switch (val) {
+        case "1":
+          this.myKeys = [
+            "写字楼",
+            "加油站",
+            "园区",
+            "学校",
+            "大厦",
+            "商业街",
+            "小区"
+          ];
+          break;
+        case "2":
+          this.myKeys = ["写字楼"];
+          break;
+        case "3":
+          this.myKeys = ["小区"];
+          break;
+        case "4":
+          this.myKeys = ["学校"];
+          break;
+        default:
+          break;
+      }
+      this.queryCity();
+    }
+  },
+  components: {
+    cityList
+  }
+};
 </script>
 <style lang='sass' scoped>
     .searchAddress {

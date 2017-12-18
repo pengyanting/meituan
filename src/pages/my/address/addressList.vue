@@ -1,18 +1,26 @@
 <template>
-    <div>
-        <HeadTop title='收货地址' style='margin-bottom:40px;'></HeadTop>
-        <section class='addressList'>
-            <div class='addressItem'>
-                <div class='text'>
-                    <p><span>家</span>上海市普陀区中江路879号天地软件园</p>
-                    <p><span>哈哈哈</span><span>女士</span><span>18017556806</span></p>
-                </div>
-                <img src="../../../assets/images/edit.png" width='20' height='20' alt="">
-            </div>
-        </section>
-        <router-link class='footer' to="/my/address/addAddress"><span>+</span>新增地址</router-link>
-    </div>
-</template>
+  <div>
+    <HeadTop
+      title="收货地址"
+      style="margin-bottom:40px;"/>
+    <section class="addressList">
+      <div class="addressItem">
+        <div class="text">
+          <p><span>家</span>上海市普陀区中江路879号天地软件园</p>
+          <p><span>哈哈哈</span><span>女士</span><span>18017556806</span></p>
+        </div>
+        <img
+          src="../../../assets/images/edit.png"
+          width="20"
+          height="20"
+          alt="">
+      </div>
+    </section>
+    <router-link
+      class="footer"
+      to="/my/address/addAddress"><span>+</span>新增地址</router-link>
+  </div>
+</template> 
 <script>
     import HeadTop from '../../../components/HeadTop.vue'
     export default {

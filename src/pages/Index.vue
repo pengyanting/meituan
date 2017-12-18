@@ -1,107 +1,107 @@
 <template>
-    <div style='background:#fff;'>
-        <mt-header>
-            <div slot="left">
-                <span class="icon-pos"></span>
-                <span id='XSDFXPage'>上海市普陀区中江路</span>
-            </div>
-        </mt-header>
-        <Search></Search>
-        <div class='searchList clearfix'>
-            <div v-for="item in searchList" :key='item'>{{item.name}}</div>
+<div style='background:#fff;'>
+    <mt-header>
+        <div slot="left">
+            <span class="icon-pos"></span>
+            <span id='XSDFXPage'>上海市普陀区中江路</span>
         </div>
-        <div class="foodTypeBox">
+    </mt-header>
+    <Search></Search>
+    <div class='searchList clearfix'>
+        <div v-for="(item,index) in searchList" :key='index'>{{item.name}}</div>
+    </div>
+    <div class="foodTypeBox">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide foodType">
+                    <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index<8' :key='item'>
+                        <img :src="$root._data.url+item.image_url" alt="">
+                        <span>{{item.title}}</span>
+                    </div>
+                </div>
+                <div class="swiper-slide foodType">
+                    <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index>7' :key='item'>
+                        <img :src="$root._data.url+item.image_url" alt="">
+                        <span>{{item.title}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="waimaiActive">
+            <img src="../assets/images/waimai-active.png" alt="">
+        </div>
+    </div>
+    <div class="space"></div>
+    <section class="bannerBottom">
+        <div class="bannerBottomList" v-for="index in bannerBottomList" :key="index">
+            <div class="bbl-item">
+                <h4>{{index.title}}</h4>
+                <span>{{index.desc}}</span>
+            </div>
+            <img src="../assets/images/banner-img.png" alt="">
+        </div>
+    </section>
+    <div class="space"></div>
+    <section class="flashSale">
+        <div class="flashSaleTitle">
+            <h4>限时抢购</h4>
+            <div class="flashSaleTime">距离结束
+                <span>00</span>:
+                <span>12</span>:
+                <span>12</span>
+            </div>
+            <span class="more right">更多&gt;</span>
+        </div>
+        <div class="flashSaleList">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide foodType">
-                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index<8' :key='item'>
-                            <img :src="$root._data.url+item.image_url" alt="">
-                            <span>{{item.title}}</span>
-                        </div>
-                    </div>
-                    <div class="swiper-slide foodType">
-                        <div class="foodTypeList" v-for='(item,index) in categoryList' v-if='index>7' :key='item'>
-                            <img :src="$root._data.url+item.image_url" alt="">
-                            <span>{{item.title}}</span>
-                        </div>
+                    <div class="swiper-slide" v-for="item in flashSaleList" :key="item">
+                        <img src="../assets/images/flashSale.png" alt="">
+                        <p>{{item.title}}</p>
+                        <p>
+                            <span>￥{{item.price}}</span>
+                            <span>{{item.oldPrice}}</span>
+                        </p>
                     </div>
                 </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="waimaiActive">
-                <img src="../assets/images/waimai-active.png" alt="">
             </div>
         </div>
-        <div class="space"></div>
-        <section class="bannerBottom">
-            <div class="bannerBottomList" v-for="index in bannerBottomList" :key="index">
-                <div class="bbl-item">
-                    <h4>{{index.title}}</h4>
-                    <span>{{index.desc}}</span>
-                </div>
-                <img src="../assets/images/banner-img.png" alt="">
+    </section>
+    <div class="space"></div>
+    <section class="pinzhi">
+        <div class="pinzhiTitle">
+            <h4>品质优选</h4>
+            <span class="more right">更多&gt;</span>
+        </div>
+        <div class="pinzhiList">
+            <div class="pinzhiListItem" v-for="item in pinzhiList" :key="item">
+                <img src="../assets/images/pinzhi-img.png" alt="">
+                <h4>{{item.title}}</h4>
+                <span :class="{'color1':item.desc=='点评高分','color2':item.desc=='热销好店','color3':item.desc=='大牌精选'}">{{item.desc}}</span>
             </div>
-        </section>
-        <div class="space"></div>
-        <section class="flashSale">
-            <div class="flashSaleTitle">
-                <h4>限时抢购</h4>
-                <div class="flashSaleTime">距离结束
-                    <span>00</span>:
-                    <span>12</span>:
-                    <span>12</span>
-                </div>
-                <span class="more right">更多&gt;</span>
+        </div>
+    </section>
+    <div class="space"></div>
+    <section class="bannerBottom">
+        <div class="bannerBottomList" v-for="index in pinzhiBottomList" :key="index">
+            <div class="bbl-item">
+                <h4>{{index.title}}</h4>
+                <span>{{index.desc}}</span>
             </div>
-            <div class="flashSaleList">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="item in flashSaleList" :key="item">
-                            <img src="../assets/images/flashSale.png" alt="">
-                            <p>{{item.title}}</p>
-                            <p>
-                                <span>￥{{item.price}}</span>
-                                <span>{{item.oldPrice}}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="space"></div>
-        <section class="pinzhi">
-            <div class="pinzhiTitle">
-                <h4>品质优选</h4>
-                <span class="more right">更多&gt;</span>
-            </div>
-            <div class="pinzhiList">
-                <div class="pinzhiListItem" v-for="item in pinzhiList" :key="item">
-                    <img src="../assets/images/pinzhi-img.png" alt="">
-                    <h4>{{item.title}}</h4>
-                    <span :class="{'color1':item.desc=='点评高分','color2':item.desc=='热销好店','color3':item.desc=='大牌精选'}">{{item.desc}}</span>
-                </div>
-            </div>
-        </section>
-        <div class="space"></div>
-        <section class="bannerBottom">
-            <div class="bannerBottomList" v-for="index in pinzhiBottomList" :key="index">
-                <div class="bbl-item">
-                    <h4>{{index.title}}</h4>
-                    <span>{{index.desc}}</span>
-                </div>
-                <img src="../assets/images/banner-img.png" alt="">
-            </div>
-        </section>
-        <div class='space'></div>
-        <section class='introList'>
-            <h4 class='title'>推荐商家</h4>
-            <div v-for='item in recommendList' :key='item' @click='toDetail(item)'>
-                <List :foodList='item' active></List>
-            </div>
-        </section>
-        <div class='space'></div>
-        <FootBottom title='外卖'></FootBottom>
-    </div>
+            <img src="../assets/images/banner-img.png" alt="">
+        </div>
+    </section>
+    <div class='space'></div>
+    <section class='introList'>
+        <h4 class='title'>推荐商家</h4>
+        <div v-for='item in recommendList' :key='item' @click='toDetail(item)'>
+            <List :foodList='item' active></List>
+        </div>
+    </section>
+    <div class='space'></div>
+    <FootBottom title='外卖'></FootBottom>
+  </div>
 </template>
 <script>
 import Search from "../components/search.vue"

@@ -17,51 +17,55 @@
     </div>
 </template>
 <script>
-    import HeadTop from '../../../components/HeadTop.vue'
-    import Tag from '../../../components/tag.vue'
-    export default {
-        data() {
-            return {
-               list:[
-                   {
-                       value:'女士'
-                   },{
-                       value:'先生'
-                   }
-               ],
-               Taglist:[{
-                   value:'家'
-               },{
-                   value:'公司'
-               },{
-                   value:'学校'
-               }],
-               sex:'',
-               tag:'',
-               position:{}
-            }
+import HeadTop from "../../../components/HeadTop.vue";
+import Tag from "../../../components/tag.vue";
+export default {
+  data() {
+    return {
+      list: [
+        {
+          value: "女士"
         },
-        methods:{
-            selectSex(value){
-                this.sex=value;
-            },
-            selectTag(value){
-                this.tag=value;
-            },
-            toMap(){
-                this.$router.push({'path':'/my/address/confirmAddress'})
-            }
-        },
-        components: {
-            HeadTop,
-            Tag
-        },
-        mounted () {
-           this.position=this.$store.state.address;
-           this.$store.dispatch('ADDRESS' ,{})
+        {
+          value: "先生"
         }
+      ],
+      Taglist: [
+        {
+          value: "家"
+        },
+        {
+          value: "公司"
+        },
+        {
+          value: "学校"
+        }
+      ],
+      sex: "",
+      tag: "",
+      position: {}
+    };
+  },
+  methods: {
+    selectSex(value) {
+      this.sex = value;
+    },
+    selectTag(value) {
+      this.tag = value;
+    },
+    toMap() {
+      this.$router.push({ path: "/my/address/confirmAddress" });
     }
-
+  },
+  components: {
+    HeadTop,
+    Tag
+  },
+  mounted() {
+    this.position = this.$store.state.address;
+    this.$store.dispatch("ADDRESS", {});
+  }
+};
 </script>
 <style lang='sass'>
     .pageSide {
